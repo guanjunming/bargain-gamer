@@ -2,29 +2,22 @@ import { useQuery } from "@tanstack/react-query";
 import { useEffect, useRef, useState } from "react";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { searchGames } from "../api/api";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { modifyImageUrl } from "../utils/utils";
+import { useDebounce } from "../hooks/useDebounce";
 
 const SearchBar = () => {
   const [query, setQuery] = useState("");
-  const [debouncedQuery, setDebouncedQuery] = useState("");
+  const debouncedQuery = useDebounce(query, 500);
   const [hasFocus, setHasFocus] = useState(false);
   const inputRef = useRef(null);
   const location = useLocation();
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setDebouncedQuery(query);
-    }, 500);
-
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [query]);
+  const navigate = useNavigate();
 
   const { data } = useQuery({
-    queryKey: ["games", debouncedQuery],
-    queryFn: () => searchGames(debouncedQuery),
-    enabled: debouncedQuery !== "",
+    queryKey: ["games", { search: debouncedQuery, page_size: 5 }],
+    queryFn: () => searchGames({ search: debouncedQuery, page_size: 5 }),
+    enabled: !!debouncedQuery,
   });
 
   useEffect(() => {
@@ -32,17 +25,16 @@ const SearchBar = () => {
     inputRef.current.blur();
   }, [location]);
 
-  const handleSubmit = (event) => {
+  const handleSearch = (event) => {
     event.preventDefault();
-
-    console.log(query);
+    navigate(`/games?search=${encodeURIComponent(query)}`);
   };
 
   return (
     <div className="w-full max-w-sm bg-white rounded-lg">
       <form
         className="relative flex items-center gap-2 w-full"
-        onSubmit={handleSubmit}
+        onSubmit={handleSearch}
       >
         <input
           ref={inputRef}
@@ -58,7 +50,7 @@ const SearchBar = () => {
         <label
           htmlFor="search"
           className="p-1.5 mr-1 cursor-pointer"
-          onClick={handleSubmit}
+          onClick={handleSearch}
         >
           <FaMagnifyingGlass />
         </label>
@@ -74,7 +66,7 @@ const SearchBar = () => {
                 onMouseDown={(e) => e.preventDefault()} // to prevent input lose focus
               >
                 <img
-                  src={game.background_image}
+                  src={modifyImageUrl(game.background_image, "small")}
                   alt={game.name}
                   className="w-20 h-[2.8125rem] object-cover"
                 />
@@ -82,7 +74,11 @@ const SearchBar = () => {
               </Link>
             ))}
             <div className="mt-1 px-2 py-1 text-sm">
-              <span className="underline mr-2 cursor-pointer">
+              <span
+                className="underline mr-2 cursor-pointer"
+                onClick={handleSearch}
+                onMouseDown={(e) => e.preventDefault()}
+              >
                 See all results
               </span>
               {data.count}

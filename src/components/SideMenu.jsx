@@ -1,5 +1,3 @@
-import { NavLink } from "react-router-dom";
-
 export default function SideMenu() {
   return (
     <aside className=" text-white flex flex-col w-[300px] py-8 px-6">

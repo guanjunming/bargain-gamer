@@ -1,64 +1,24 @@
 import { Link } from "react-router-dom";
-
 import { IconContext } from "react-icons";
 import PlatformIcons from "./PlatformIcons";
+import { modifyImageUrl } from "../utils/utils";
 
-const cardData = {
-  name: "Elden Ring: Shadow of the Erdtree",
-  background_image:
-    "https://media.rawg.io/media/screenshots/0ba/0bae7160eedc1f7d85a8d2db70cf1ec9.jpg",
-  parent_platforms: [
-    {
-      platform: {
-        id: 1,
-        name: "PC",
-        slug: "pc",
-      },
-    },
-    {
-      platform: {
-        id: 2,
-        name: "PlayStation",
-        slug: "playstation",
-      },
-    },
-    {
-      platform: {
-        id: 3,
-        name: "Xbox",
-        slug: "xbox",
-      },
-    },
-  ],
-  genres: [
-    {
-      id: 40,
-      name: "Casual",
-      slug: "casual",
-    },
-    {
-      id: 3,
-      name: "Adventure",
-      slug: "adventure",
-    },
-  ],
-};
-
-const GameCard = () => {
+const GameCard = ({ game }) => {
   return (
-    <div className="text-white  flex flex-col bg-gray-700 shadow-lg transition duration-300 hover:scale-[1.02]">
-      <Link>
+    <div className="flex flex-col bg-gray-700 shadow-lg transition duration-300 hover:scale-[1.02]">
+      <Link to={`/games/${game.id}`} state={{ game: game }}>
         <img
-          src={cardData.background_image}
+          src={modifyImageUrl(game.background_image, "medium")}
+          alt={game.name + " thumbnail"}
           className="aspect-[1.7/1] object-cover bg-center w-full overflow-hidden"
         />
         <div className="flex flex-col gap-2 p-3">
-          <h3 className="font-bold text-xl">{cardData.name}</h3>
+          <h3 className="text-white font-bold text-xl">{game.name}</h3>
           <IconContext.Provider value={{ color: "white", size: "0.875rem" }}>
-            <PlatformIcons platforms={cardData.parent_platforms} />
+            <PlatformIcons platforms={game.parent_platforms} />
           </IconContext.Provider>
-          <p className="text-sm">
-            {cardData.genres.map((genre) => genre.name).join(", ")}{" "}
+          <p className="text-sm text-gray-300">
+            {game.genres.map((genre) => genre.name).join(", ")}
           </p>
         </div>
       </Link>

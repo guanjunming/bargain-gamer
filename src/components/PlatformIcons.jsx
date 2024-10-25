@@ -3,6 +3,7 @@ import {
   SiWindows,
   SiXbox,
   SiApple,
+  SiIos,
   SiNintendoswitch,
   SiLinux,
   SiSega,
@@ -10,6 +11,7 @@ import {
   SiCommodore,
 } from "react-icons/si";
 import { DiAndroid } from "react-icons/di";
+import { IoGameController } from "react-icons/io5";
 
 const PlatformIcons = ({ platforms }) => {
   return (
@@ -24,6 +26,7 @@ const PlatformIcons = ({ platforms }) => {
             case "xbox":
               return <SiXbox />;
             case "ios":
+              return <SiIos />;
             case "mac":
               return <SiApple />;
             case "android":
@@ -39,7 +42,7 @@ const PlatformIcons = ({ platforms }) => {
             case "sega":
               return <SiSega />;
             default:
-              return <SiWindows />;
+              return <IoGameController />;
           }
         })}
     </div>

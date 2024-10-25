@@ -1,11 +1,7 @@
 const URL = "https://api.rawg.io/api/";
 const API_KEY = import.meta.env.VITE_RAWG_API_KEY;
 
-export const searchGames = async (query) => {
-  const params = {
-    search: query,
-    page_size: 5,
-  };
+export const searchGames = async (params) => {
   const searchParams = new URLSearchParams(params).toString();
   const response = await fetch(`${URL}games?key=${API_KEY}&${searchParams}`);
 
