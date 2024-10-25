@@ -4,7 +4,6 @@ const API_KEY = import.meta.env.VITE_RAWG_API_KEY;
 export const searchGames = async (query) => {
   const params = {
     search: query,
-    // search_precise: true,
     page_size: 5,
   };
   const searchParams = new URLSearchParams(params).toString();

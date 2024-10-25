@@ -81,7 +81,12 @@ const SearchBar = () => {
                 <p className="text-sm font-semibold">{game.name}</p>
               </Link>
             ))}
-            <div className="px-2">More results</div>
+            <div className="mt-1 px-2 py-1 text-sm">
+              <span className="underline mr-2 cursor-pointer">
+                See all results
+              </span>
+              {data.count}
+            </div>
           </div>
         )}
       </form>
