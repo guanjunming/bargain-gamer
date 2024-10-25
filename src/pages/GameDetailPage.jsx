@@ -6,7 +6,7 @@ const GameDetailPage = () => {
   return (
     <>
       <h1>GameDetailPage</h1>
-      <p>{params.gameId}</p>
+      <p className="text-white">{params.id}</p>
     </>
   );
 };
