@@ -27,7 +27,9 @@ const SearchBar = () => {
 
   const handleSearch = (event) => {
     event.preventDefault();
-    navigate(`/games?search=${encodeURIComponent(query)}`);
+    if (query !== "") {
+      navigate(`/games?search=${encodeURIComponent(query)}`);
+    }
   };
 
   return (

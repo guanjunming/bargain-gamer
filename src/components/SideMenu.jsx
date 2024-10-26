@@ -1,6 +1,6 @@
 export default function SideMenu() {
   return (
-    <aside className=" text-white flex flex-col w-[300px] py-8 px-6">
+    <aside className=" text-white flex flex-col w-[300px]">
       <div className="space-y-3">
         <h2 className="font-bold text-xl">Discover</h2>
       </div>
