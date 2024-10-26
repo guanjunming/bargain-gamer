@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useRef, useState } from "react";
 import { FaMagnifyingGlass } from "react-icons/fa6";
-import { searchGames } from "../api/api";
+import { getGamesList } from "../api/api";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { modifyImageUrl } from "../utils/utils";
 import { useDebounce } from "../hooks/useDebounce";
@@ -16,7 +16,7 @@ const SearchBar = () => {
 
   const { data } = useQuery({
     queryKey: ["games", { search: debouncedQuery, page_size: 5 }],
-    queryFn: () => searchGames({ search: debouncedQuery, page_size: 5 }),
+    queryFn: () => getGamesList({ search: debouncedQuery, page_size: 5 }),
     enabled: !!debouncedQuery,
   });
 

@@ -3,28 +3,18 @@ import {
   SiWindows,
   SiXbox,
   SiApple,
-  SiIos,
   SiNintendoswitch,
   SiLinux,
-  SiSega,
-  SiAtari,
-  SiCommodore,
 } from "react-icons/si";
-import { DiAndroid } from "react-icons/di";
 
 const PlatformIcons = ({ platforms }) => {
   const platformIconMap = {
     pc: <SiWindows />,
     playstation: <SiPlaystation />,
     xbox: <SiXbox />,
-    ios: <SiIos />,
     mac: <SiApple />,
-    android: <DiAndroid />,
     linux: <SiLinux />,
     nintendo: <SiNintendoswitch />,
-    atari: <SiAtari />,
-    "commodore-amiga": <SiCommodore />,
-    sega: <SiSega />,
   };
 
   return (

@@ -1,11 +1,13 @@
 import SideMenu from "../components/SideMenu";
 import GameCard from "../components/GameCard";
-import { useSearchParams } from "react-router-dom";
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
-import { searchGames } from "../api/api";
+import { useLocation, useSearchParams } from "react-router-dom";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { getGamesList } from "../api/api";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useEffect, useRef } from "react";
 import { useIntersection } from "@mantine/hooks";
+import { FETCH_PAGE_SIZE } from "../data/constants";
+import { exploreQueryMap } from "../data/sideMenuData";
 
 const GamesPage = () => {
   const [searchParams] = useSearchParams();
@@ -14,14 +16,23 @@ const GamesPage = () => {
     root: loadMoreRef.current,
     threshold: 1,
   });
+  const location = useLocation();
 
-  const query = searchParams.get("search");
+  let query = null;
+  const searchTerms = searchParams.get("search");
+  const exploreQuery = exploreQueryMap[location.pathname];
+
+  if (searchTerms) {
+    query = { search: searchTerms, page_size: FETCH_PAGE_SIZE };
+  } else if (exploreQuery) {
+    query = { ...exploreQuery.query, page_size: FETCH_PAGE_SIZE };
+  }
 
   const { data, fetchNextPage, isFetchingNextPage, hasNextPage } =
     useInfiniteQuery({
-      queryKey: ["games", { search: query, page_size: 20 }],
+      queryKey: ["games", query],
       queryFn: ({ pageParam = 1 }) =>
-        searchGames({ search: query, page_size: 20, page: pageParam }),
+        getGamesList({ ...query, page: pageParam }),
       getNextPageParam: (lastPage, pages) => {
         const { next } = lastPage;
         return next ? pages.length + 1 : undefined;
@@ -42,7 +53,11 @@ const GamesPage = () => {
       <div className="w-full flex flex-col">
         <div className="mb-4">
           <h1 className="text-white font-bold text-4xl">
-            Search results for: {query}
+            {searchTerms
+              ? `Search results for: ${searchTerms}`
+              : exploreQuery
+              ? exploreQuery.title
+              : "Oops, something went wrong"}
           </h1>
         </div>
 
@@ -50,6 +65,11 @@ const GamesPage = () => {
           {/* <div className="h-10 bg-gray-600 mb-6">Sorting here</div> */}
 
           <div className="flex flex-col items-center">
+            {!data && query && (
+              <div className="w-full flex justify-center text-white mt-20">
+                <CircularProgress size="4rem" color="inherit" />
+              </div>
+            )}
             <div className="w-full grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-x-6 gap-y-6">
               {data?.pages.map((page) =>
                 page.results.map((game) => (

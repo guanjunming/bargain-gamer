@@ -1,8 +1,17 @@
 const URL = "https://api.rawg.io/api/";
 const API_KEY = import.meta.env.VITE_RAWG_API_KEY;
 
-export const searchGames = async (params) => {
-  const searchParams = new URLSearchParams(params).toString();
+export const getGamesList = async (params) => {
+  let filteredParams = params;
+  if (
+    !params.hasOwnProperty("parent_platforms") &&
+    !params.hasOwnProperty("platforms")
+  ) {
+    console.log("add platform filter");
+    filteredParams = { ...params, platforms: "4,5,6" };
+  }
+
+  const searchParams = new URLSearchParams(filteredParams).toString();
   const response = await fetch(`${URL}games?key=${API_KEY}&${searchParams}`);
 
   if (!response.ok) {

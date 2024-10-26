@@ -19,3 +19,47 @@ export const modifyImageUrl = (imageUrl, size) => {
 
   return imageUrl;
 };
+
+export const getFeaturedDates = () => {
+  const today = new Date();
+  const pastDate = new Date(today);
+  pastDate.setFullYear(today.getFullYear() - 1);
+
+  const startDate = pastDate.toISOString().split("T")[0];
+  const endDate = today.toISOString().split("T")[0];
+
+  return startDate + "," + endDate;
+};
+
+export const getPopularDates = () => {
+  const today = new Date();
+  const pastDate = new Date(today);
+  pastDate.setFullYear(today.getFullYear() - 2);
+
+  const startDate = pastDate.toISOString().split("T")[0];
+  const endDate = today.toISOString().split("T")[0];
+
+  return startDate + "," + endDate;
+};
+
+export const getNewReleaseDates = () => {
+  const today = new Date();
+  const pastDate = new Date(today);
+  pastDate.setMonth(today.getMonth() - 1);
+
+  const startDate = pastDate.toISOString().split("T")[0];
+  const endDate = today.toISOString().split("T")[0];
+
+  return startDate + "," + endDate;
+};
+
+export const getUpcomingDates = () => {
+  const today = new Date();
+  const upcomingDate = new Date(today);
+  upcomingDate.setMonth(today.getMonth() + 1);
+
+  const startDate = today.toISOString().split("T")[0];
+  const endDate = upcomingDate.toISOString().split("T")[0];
+
+  return startDate + "," + endDate;
+};
