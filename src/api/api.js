@@ -3,11 +3,7 @@ const API_KEY = import.meta.env.VITE_RAWG_API_KEY;
 
 export const getGamesList = async (params) => {
   let filteredParams = params;
-  if (
-    !params.hasOwnProperty("parent_platforms") &&
-    !params.hasOwnProperty("platforms")
-  ) {
-    console.log("add platform filter");
+  if (!("parent_platforms" in params) && !("platforms" in params)) {
     filteredParams = { ...params, platforms: "4,5,6" };
   }
 
