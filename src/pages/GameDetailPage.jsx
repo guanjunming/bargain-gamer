@@ -1,25 +1,26 @@
 import { useParams } from "react-router-dom";
 import { getGameById } from "../api/api";
-import CircularProgress from "@mui/material/CircularProgress";
 import { useQuery } from "@tanstack/react-query";
+
+export const loader =
+  (queryClient) =>
+  ({ params }) => {
+    return queryClient.fetchQuery({
+      queryKey: ["game", params.id],
+      queryFn: () => getGameById(params.id),
+    });
+  };
 
 const GameDetailPage = () => {
   const { id } = useParams();
 
-  const { data: game, isPending } = useQuery({
+  const { data: game } = useQuery({
     queryKey: ["game", id],
     queryFn: () => getGameById(id),
   });
 
-  console.log("ispending", isPending);
-
   return (
     <div className="w-full text-white">
-      {isPending && (
-        <div className="flex justify-center">
-          <CircularProgress size={50} sx={{ color: "white" }} />
-        </div>
-      )}
       {game && (
         <div>
           <h1 className="text-2xl">{game.name}</h1>

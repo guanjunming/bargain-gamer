@@ -9,6 +9,9 @@ import GamesPage from "./pages/GamesPage";
 import GameDetailPage from "./pages/GameDetailPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import GameDetailRedirect from "./pages/GameDetailRedirect";
+import { loader as gameDetailLoader } from "./pages/GameDetailPage";
+
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
@@ -19,13 +22,15 @@ const router = createBrowserRouter([
       { path: "games", element: <GamesPage /> },
       { path: "explore/:list", element: <GamesPage /> },
       { path: "games/:id", element: <GameDetailRedirect /> },
-      { path: "games/:id/:slug", element: <GameDetailPage /> },
+      {
+        path: "games/:id/:slug",
+        element: <GameDetailPage />,
+        loader: gameDetailLoader(queryClient),
+      },
       { path: "*", element: <Navigate replace to="/" /> },
     ],
   },
 ]);
-
-const queryClient = new QueryClient();
 
 function App() {
   return (
