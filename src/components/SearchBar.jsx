@@ -33,7 +33,7 @@ const SearchBar = () => {
   };
 
   return (
-    <div className="w-full max-w-sm bg-white rounded-lg">
+    <div className="w-full max-w-sm bg-white rounded-md">
       <form
         className="relative flex items-center gap-2 w-full"
         onSubmit={handleSearch}
@@ -58,7 +58,7 @@ const SearchBar = () => {
         </label>
 
         {hasFocus && data && data.results.length > 0 && (
-          <div className="flex flex-col mt-1 py-1 bg-white bg-opacity-95 absolute top-full w-full z-10 rounded-lg shadow-xl">
+          <div className="flex flex-col mt-1 py-1 bg-white bg-opacity-95 absolute top-full w-full z-10 rounded-md shadow-xl">
             {data.results.map((game) => (
               <Link
                 to={`/games/${game.id}`}

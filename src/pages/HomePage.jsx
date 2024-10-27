@@ -1,7 +1,11 @@
+import { Link } from "react-router-dom";
+
 const HomePage = () => {
   return (
     <>
-      <h1>HomePage</h1>
+      <Link to="/explore/featured">
+        <div className="text-white px-5 text-xl">Go To Explore</div>
+      </Link>
     </>
   );
 };
