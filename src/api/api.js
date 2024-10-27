@@ -36,24 +36,6 @@ export const getGameById = async (id) => {
   return data;
 };
 
-export const getFavorites = async (userId) => {
-  const response = await fetch(
-    `${FAVORITES_API_URL}?filterByFormula=UserId="${userId}"`,
-    {
-      headers: {
-        Authorization: `Bearer ${AIRTABLE_API_TOKEN}`,
-      },
-    }
-  );
-
-  if (!response.ok) {
-    throw new Error(response.statusText);
-  }
-
-  const data = await response.json();
-  return data.records.map((record) => record.fields);
-};
-
 export const createUser = async ({ username, password }) => {
   const response = await fetch(`${AIRTABLE_URL}/Users`, {
     method: "POST",
@@ -75,6 +57,51 @@ export const createUser = async ({ username, password }) => {
 
   const data = await response.json();
   return data;
+};
+
+export const authenticateUser = async ({ username, password }) => {
+  const queryParams = encodeURIComponent(
+    `AND({Username}="${username}",{Password}="${password}")`
+  );
+  const response = await fetch(
+    `${AIRTABLE_URL}/Users?filterByFormula=${queryParams}`,
+    {
+      headers: {
+        Authorization: `Bearer ${AIRTABLE_API_TOKEN}`,
+        "Content-Type": "application/json",
+      },
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to login user.");
+  }
+
+  const data = await response.json();
+
+  if (data.records.length > 0) {
+    return data.records[0];
+  } else {
+    throw new Error("Please check you username and password and try again.");
+  }
+};
+
+export const getFavorites = async (userId) => {
+  const response = await fetch(
+    `${FAVORITES_API_URL}?filterByFormula=UserId="${userId}"`,
+    {
+      headers: {
+        Authorization: `Bearer ${AIRTABLE_API_TOKEN}`,
+      },
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error(response.statusText);
+  }
+
+  const data = await response.json();
+  return data.records.map((record) => record.fields);
 };
 
 export const addFavorite = async (userId, gameId) => {

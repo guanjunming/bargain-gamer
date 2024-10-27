@@ -1,27 +1,19 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import Input from "../components/Input";
 import { Link, useNavigate } from "react-router-dom";
-import { createUser } from "../api/api";
+import { authenticateUser } from "../api/api";
 import { useMutation } from "@tanstack/react-query";
 import { CircularProgress } from "@mui/material";
 import { useUserContext } from "../context/contextHooks";
 
-const SignUpPage = () => {
+const LoginPage = () => {
   const usernameRef = useRef(null);
   const passwordRef = useRef(null);
-  const cfmPasswordRef = useRef(null);
-  const [isError, setIsError] = useState(false);
-  const [error, setError] = useState("");
   const navigate = useNavigate();
   const { loginUser } = useUserContext();
 
-  const {
-    mutate,
-    isPending,
-    isError: isRequestError,
-    error: requestError,
-  } = useMutation({
-    mutationFn: createUser,
+  const { mutate, isPending, isError, error } = useMutation({
+    mutationFn: authenticateUser,
     onSuccess: (data) => {
       loginUser({
         userId: data.id,
@@ -34,28 +26,10 @@ const SignUpPage = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    setIsError(false);
-    setError("");
-
     const username = usernameRef.current.value.trim();
-    const password = passwordRef.current.value;
-    const confirmPassword = cfmPasswordRef.current.value;
+    const password = passwordRef.current.value.trim();
 
-    if (username === "") {
-      setIsError(true);
-      setError("Please enter your username.");
-      return;
-    }
-
-    if (password.includes(" ")) {
-      setIsError(true);
-      setError("Password must not contain spaces.");
-      return;
-    }
-
-    if (password !== confirmPassword) {
-      setIsError(true);
-      setError("Please enter the same password in both password fields.");
+    if (username === "" || password === "") {
       return;
     }
 
@@ -65,16 +39,15 @@ const SignUpPage = () => {
   return (
     <div className="w-full min-h-full">
       <div className="m-auto max-w-[700px] min-h-[600px] p-5">
-        {(isError || isRequestError) && (
+        {isError && (
           <div className="bg-black border-2 border-red-900 text-white p-2.5 mb-2.5 text-sm">
-            {isError && error}
-            {isRequestError && requestError.message}
+            {error.message}
           </div>
         )}
         <form onSubmit={handleSubmit} className="px-5 py-4">
           <div className="space-y-8">
             <h1 className="text-white text-4xl text-center font-bold">
-              Create Your Account
+              Sign in
             </h1>
             <Input
               ref={usernameRef}
@@ -89,16 +62,9 @@ const SignUpPage = () => {
               label="Password"
               styles="tracking-widest "
             />
-            <Input
-              ref={cfmPasswordRef}
-              type="password"
-              name="confirm-password"
-              label="Confirm you password"
-              styles="tracking-widest "
-            />
           </div>
           <button className=" w-full mt-10 px-2 py-2.5 text-white shadow-lg rounded-sm bg-gradient-to-r from-blue-400 to-blue-700 hover:from-blue-300 hover:to-blue-600">
-            {!isPending && "Sign up"}
+            {!isPending && "Sign in"}
             {isPending && (
               <CircularProgress
                 size={18}
@@ -106,9 +72,9 @@ const SignUpPage = () => {
               />
             )}
           </button>
-          <Link to="/login" className="flex justify-center mt-6">
+          <Link to="/signup" className="flex justify-center mt-6">
             <p className="text-center text-sm text-gray-300 hover:text-white  border-b-[1px] border-gray-300">
-              Already have an account? Log in.
+              {"Don't have an account? Sign up."}
             </p>
           </Link>
         </form>
@@ -117,4 +83,4 @@ const SignUpPage = () => {
   );
 };
 
-export default SignUpPage;
+export default LoginPage;

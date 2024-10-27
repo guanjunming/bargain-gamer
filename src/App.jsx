@@ -12,6 +12,8 @@ import GameDetailRedirect from "./pages/GameDetailRedirect";
 import { loader as gameDetailLoader } from "./pages/GameDetailPage";
 import { UserFavoritesProvider } from "./context/UserFavoritesContext";
 import SignUpPage from "./pages/SignUpPage";
+import LoginPage from "./pages/LoginPage";
+import { UserProvider } from "./context/UserContext";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +32,7 @@ const router = createBrowserRouter([
         loader: gameDetailLoader(queryClient),
       },
       { path: "signup", element: <SignUpPage /> },
+      { path: "login", element: <LoginPage /> },
       { path: "*", element: <Navigate replace to="/" /> },
     ],
   },
@@ -38,9 +41,11 @@ const router = createBrowserRouter([
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <UserFavoritesProvider>
-        <RouterProvider router={router} />
-      </UserFavoritesProvider>
+      <UserProvider>
+        <UserFavoritesProvider>
+          <RouterProvider router={router} />
+        </UserFavoritesProvider>
+      </UserProvider>
     </QueryClientProvider>
   );
 }

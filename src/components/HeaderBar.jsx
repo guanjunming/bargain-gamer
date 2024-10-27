@@ -3,11 +3,11 @@ import SearchBar from "./SearchBar";
 import logo from "../assets/logo.svg";
 import Avatar from "@mui/material/Avatar";
 import { blueGrey } from "@mui/material/colors";
-import { useUserFavorites } from "../context/UserFavoritesContext";
 import { getAvatarInitials } from "../utils/utils";
+import { useUserContext } from "../context/contextHooks";
 
 const HeaderBar = () => {
-  const { user } = useUserFavorites();
+  const { user } = useUserContext();
 
   return (
     <nav className=" w-full flex items-center gap-4 py-6 px-8 justify-between bg-gray-800">
@@ -23,7 +23,7 @@ const HeaderBar = () => {
       <SearchBar />
 
       {!user && (
-        <Link to="/signup">
+        <Link to="/login">
           <h2 className="text-gray-300 hover:text-white font-medium">Log In</h2>
         </Link>
       )}

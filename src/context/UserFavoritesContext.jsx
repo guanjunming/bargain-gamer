@@ -1,15 +1,13 @@
 import { createContext, useContext, useState } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { getFavorites } from "../api/api";
+import { useUserContext } from "./contextHooks";
 
-const UserFavoritesContext = createContext();
-
-export const useUserFavorites = () => {
-  return useContext(UserFavoritesContext);
-};
+export const FavoritesContext = createContext();
 
 export const UserFavoritesProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const { user } = useUserContext();
+  const [favorites, setFavorites] = useState([]);
 
   // const { data: favorites, refetch } = useQuery({
   //   queryKey: ["favorites", userId],
@@ -38,16 +36,14 @@ export const UserFavoritesProvider = ({ children }) => {
   // };
 
   const userFavoritesCtx = {
-    user,
-    setUser,
-    // favorites,
+    favorites,
     // addFavorite,
     // removeFavorite,
   };
 
   return (
-    <UserFavoritesContext.Provider value={userFavoritesCtx}>
+    <FavoritesContext.Provider value={userFavoritesCtx}>
       {children}
-    </UserFavoritesContext.Provider>
+    </FavoritesContext.Provider>
   );
 };
