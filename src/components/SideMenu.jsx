@@ -7,7 +7,7 @@ import {
 } from "../data/sideMenuData";
 import SideMenuLink from "./SideMenuLink";
 import { IconContext } from "react-icons";
-import { FaAngleUp, FaAngleDown } from "react-icons/fa6";
+import ShowAllButton from "./ShowAllButton";
 
 export default function SideMenu() {
   const [showAllGenres, setShowAllGenres] = useState(false);
@@ -50,19 +50,10 @@ export default function SideMenu() {
               );
             })}
 
-            <li
-              className="cursor-pointer group"
-              onClick={() => setShowAllGenres((prev) => !prev)}
-            >
-              <div className="flex items-center gap-2">
-                <span className="p-2 rounded-md flex place-content-center bg-gray-700 text-gray-400 group-hover:bg-gray-500 group-hover:text-gray-800">
-                  {showAllGenres ? <FaAngleUp /> : <FaAngleDown />}
-                </span>
-                <span className="text-gray-400">
-                  {showAllGenres ? "Hide" : "Show all"}
-                </span>
-              </div>
-            </li>
+            <ShowAllButton
+              showAllGenres={showAllGenres}
+              setShowAllGenres={setShowAllGenres}
+            />
           </ul>
 
           <button></button>
