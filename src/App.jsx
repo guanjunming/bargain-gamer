@@ -8,6 +8,7 @@ import HomePage from "./pages/HomePage";
 import GamesPage from "./pages/GamesPage";
 import GameDetailPage from "./pages/GameDetailPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import GameDetailRedirect from "./pages/GameDetailRedirect";
 
 const router = createBrowserRouter([
   {
@@ -17,7 +18,8 @@ const router = createBrowserRouter([
       { index: true, element: <HomePage /> },
       { path: "games", element: <GamesPage /> },
       { path: "explore/:list", element: <GamesPage /> },
-      { path: "games/:id", element: <GameDetailPage /> },
+      { path: "games/:id", element: <GameDetailRedirect /> },
+      { path: "games/:id/:slug", element: <GameDetailPage /> },
       { path: "*", element: <Navigate replace to="/" /> },
     ],
   },

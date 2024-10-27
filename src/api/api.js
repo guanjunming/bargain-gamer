@@ -15,7 +15,8 @@ export const getGamesList = async (params) => {
     throw new Error(response.statusText);
   }
 
-  return await response.json();
+  const data = await response.json();
+  return data;
 };
 
 export const getGameById = async (id) => {
@@ -25,5 +26,6 @@ export const getGameById = async (id) => {
     throw new Error(response.statusText);
   }
 
-  return await response.json();
+  const data = await response.json();
+  return data;
 };

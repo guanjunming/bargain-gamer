@@ -61,8 +61,7 @@ const SearchBar = () => {
           <div className="flex flex-col mt-1 py-1 bg-white bg-opacity-95 absolute top-full w-full z-10 rounded-md shadow-xl">
             {data.results.map((game) => (
               <Link
-                to={`/games/${game.id}`}
-                state={{ game: game }}
+                to={`/games/${game.id}/${game.slug}`}
                 key={game.id}
                 className="flex items-center gap-2 px-2 py-1 min-h-[3.375rem] hover:bg-black hover:bg-opacity-10"
                 onMouseDown={(e) => e.preventDefault()} // to prevent input lose focus

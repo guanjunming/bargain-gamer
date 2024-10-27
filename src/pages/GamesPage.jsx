@@ -66,8 +66,8 @@ const GamesPage = () => {
 
           <div className="flex flex-col items-center">
             {!data && query && (
-              <div className="w-full flex justify-center text-white mt-20">
-                <CircularProgress size="4rem" color="inherit" />
+              <div className="w-full flex justify-center mt-20">
+                <CircularProgress size={50} sx={{ color: "white" }} />
               </div>
             )}
             <div className="w-full grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-x-6 gap-y-6">
@@ -78,10 +78,10 @@ const GamesPage = () => {
               )}
             </div>
 
-            <div ref={ref} className="flex justify-center py-8 text-white">
+            <div ref={ref} className="flex justify-center py-8">
               <div className="h-8">
                 {isFetchingNextPage && hasNextPage && (
-                  <CircularProgress size="2rem" color="inherit" />
+                  <CircularProgress size={30} sx={{ color: "white" }} />
                 )}
               </div>
             </div>
