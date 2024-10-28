@@ -54,9 +54,13 @@ export const exploreQueryMap = {
     query: { ordering: "-added", dates: getUpcomingDates() },
     title: "Upcoming Releases",
   },
+
   "/explore/action": { query: { genres: 4 }, title: "Action Games" },
   "/explore/adventure": { query: { genres: 3 }, title: "Adventure Games" },
-  "/explore/rpg": { query: { genres: 5 }, title: "RPG Games" },
+  "/explore/role-playing-games-rpg": {
+    query: { genres: 5 },
+    title: "RPG Games",
+  },
   "/explore/shooter": { query: { genres: 2 }, title: "Shooter Games" },
   "/explore/strategy": { query: { genres: 10 }, title: "Strategy Games" },
   "/explore/casual": { query: { genres: 40 }, title: "Casual Games" },
@@ -66,6 +70,17 @@ export const exploreQueryMap = {
   "/explore/racing": { query: { genres: 1 }, title: "Racing Games" },
   "/explore/simulation": { query: { genres: 14 }, title: "Simulation Games" },
   "/explore/sports": { query: { genres: 15 }, title: "Sports Games" },
+  "/explore/arcade": { query: { genres: 11 }, title: "Arcade Games" },
+  "/explore/platformer": { query: { genres: 83 }, title: "Platformer Games" },
+  "/explore/massively-multiplayer": {
+    query: { genres: 59 },
+    title: "Massively Multiplayer Games",
+  },
+  "/explore/family": { query: { genres: 83 }, title: "Family Games" },
+  "/explore/board-games": { query: { genres: 28 }, title: "Board Games" },
+  "/explore/educational": { query: { genres: 34 }, title: "Educational Games" },
+  "/explore/card": { query: { genres: 17 }, title: "Card Games" },
+
   "/explore/pc": { query: { parent_platforms: 1 }, title: "Windows Games" },
   "/explore/macos": { query: { platforms: 5 }, title: "Mac Games" },
   "/explore/linux": { query: { parent_platforms: 6 }, title: "Linux Games" },
@@ -139,7 +154,7 @@ export const genreLinks = [
   {
     name: "RPG",
     icon: <GiCrossedSwords />,
-    path: "/explore/rpg",
+    path: "/explore/role-playing-games-rpg",
   },
   {
     name: "Shooter",
