@@ -78,9 +78,9 @@ export const exploreLinks = [
     path: "/explore/featured",
   },
   {
-    name: "My Favorites",
+    name: "Your Favorites",
     icon: <FaHeart />,
-    path: "/explore/favorites",
+    path: "/favorites",
   },
 ];
 

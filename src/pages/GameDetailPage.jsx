@@ -1,37 +1,34 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useLoaderData, useNavigate, useParams } from "react-router-dom";
 import { getGameById } from "../api/api";
-import { useQuery } from "@tanstack/react-query";
 import { useFavoritesContext, useUserContext } from "../context/contextHooks";
 
-export const loader =
+export const gameDetailLoader =
   (queryClient) =>
-  ({ params }) => {
+  async ({ params }) => {
+    const { id } = params;
+
     return queryClient.fetchQuery({
-      queryKey: ["game", params.id],
-      queryFn: () => getGameById(params.id),
+      queryKey: ["game", id],
+      queryFn: () => getGameById(id),
     });
   };
 
 const GameDetailPage = () => {
   const { id } = useParams();
+  const game = useLoaderData();
   const { user } = useUserContext();
   const { addFavorite, removeFavorite, isFavorite, isPending } =
     useFavoritesContext();
   const navigate = useNavigate();
 
-  const { data: game } = useQuery({
-    queryKey: ["game", id],
-    queryFn: () => getGameById(id),
-  });
-
-  const isGameFavorite = isFavorite(game.id);
+  const isGameFavorite = isFavorite(id);
 
   const handleClickFavorite = () => {
     if (user) {
       if (isGameFavorite) {
-        removeFavorite(game.id);
+        removeFavorite(id);
       } else {
-        addFavorite(game.id);
+        addFavorite(id);
       }
     } else {
       navigate("/login");

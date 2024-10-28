@@ -27,7 +27,7 @@ export const FavoritesProvider = ({ children }) => {
   } = useMutation({
     mutationFn: addGameFavorite,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["favorites", user?.userId] });
+      queryClient.invalidateQueries({ queryKey: ["favorites", user.userId] });
     },
   });
 
@@ -45,7 +45,7 @@ export const FavoritesProvider = ({ children }) => {
   } = useMutation({
     mutationFn: deleteGameFavorite,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["favorites", user?.userId] });
+      queryClient.invalidateQueries({ queryKey: ["favorites", user.userId] });
     },
   });
 

@@ -1,3 +1,5 @@
+import { FETCH_PAGE_SIZE } from "../data/constants";
+
 const RAWG_URL = "https://api.rawg.io/api";
 const RAWG_API_KEY = import.meta.env.VITE_RAWG_API_KEY;
 
@@ -17,7 +19,6 @@ export const getGamesList = async (params) => {
   );
 
   if (!response.ok) {
-    console.log("has error");
     throw new Error(response.statusText);
   }
 
@@ -86,6 +87,23 @@ export const authenticateUser = async ({ username, password }) => {
   }
 };
 
+export const getFavoriteGamesData = async ({ pageParam = 0, queryKey }) => {
+  const [, favorites] = queryKey;
+  const pageSize = FETCH_PAGE_SIZE;
+
+  const currentFavs = favorites.slice(pageParam, pageParam + pageSize);
+
+  const results = await Promise.all(
+    currentFavs.map((fav) => getGameById(fav.gameId))
+  );
+
+  return {
+    results: results,
+    nextPage: pageParam + pageSize,
+    hasNextPage: pageParam + pageSize < favorites.length,
+  };
+};
+
 export const getGameFavorites = async (userId) => {
   const queryParams = encodeURIComponent(`UserId="${userId}"`);
   const response = await fetch(
@@ -111,7 +129,9 @@ export const getGameFavorites = async (userId) => {
     };
   });
 
-  return resultsProcessed;
+  return resultsProcessed.sort(
+    (a, b) => new Date(b.createdTime) - new Date(a.createdTime)
+  );
 };
 
 export const addGameFavorite = async ({ userId, gameId }) => {
