@@ -26,8 +26,23 @@ export const FavoritesProvider = ({ children }) => {
     error: addError,
   } = useMutation({
     mutationFn: addGameFavorite,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["favorites", user?.userId] });
+    onMutate: async (newFav) => {
+      await queryClient.cancelQueries({ queryKey: ["favorites", user.userId] });
+      const previousFavs = queryClient.getQueryData(["favorites", user.userId]);
+      queryClient.setQueryData(["favorites", user.userId], (old) => [
+        ...old,
+        newFav,
+      ]);
+      return { previousFavs };
+    },
+    onError: (err, newFav, context) => {
+      queryClient.setQueryData(
+        ["favorites", user.userId],
+        context.previousFavs
+      );
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ["favorites", user.userId] });
     },
   });
 
@@ -44,8 +59,22 @@ export const FavoritesProvider = ({ children }) => {
     error: deleteError,
   } = useMutation({
     mutationFn: deleteGameFavorite,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["favorites", user?.userId] });
+    onMutate: async (favoriteId) => {
+      await queryClient.cancelQueries({ queryKey: ["favorites", user.userId] });
+      const previousFavs = queryClient.getQueryData(["favorites", user.userId]);
+      queryClient.setQueryData(["favorites", user.userId], (old) =>
+        old.filter((fav) => fav.favoriteId !== favoriteId)
+      );
+      return { previousFavs };
+    },
+    onError: (err, favoriteId, context) => {
+      queryClient.setQueryData(
+        ["favorites", user.userId],
+        context.previousFavs
+      );
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ["favorites", user.userId] });
     },
   });
 
