@@ -33,7 +33,7 @@ const SearchBar = () => {
   };
 
   return (
-    <div className="w-full max-w-sm bg-white rounded-md">
+    <div className="w-full max-w-sm bg-white rounded-sm">
       <form
         className="relative flex items-center gap-2 w-full"
         onSubmit={handleSearch}
@@ -58,12 +58,12 @@ const SearchBar = () => {
         </label>
 
         {hasFocus && data && data.results.length > 0 && (
-          <div className="flex flex-col mt-1 py-1 bg-white bg-opacity-95 absolute top-full w-full z-10 rounded-md shadow-xl">
+          <div className="flex flex-col mt-1 py-1 bg-gray-700 text-white absolute top-full w-full z-10 rounded-md shadow-xl">
             {data.results.map((game) => (
               <Link
                 to={`/games/${game.id}/${game.slug}`}
                 key={game.id}
-                className="flex items-center gap-2 px-2 py-1 min-h-[3.375rem] hover:bg-black hover:bg-opacity-10"
+                className="flex items-center gap-2 px-2 py-1 min-h-[3.375rem] hover:bg-white hover:text-gray-700"
                 onMouseDown={(e) => e.preventDefault()} // to prevent input lose focus
               >
                 <img
@@ -76,7 +76,7 @@ const SearchBar = () => {
             ))}
             <div className="mt-1 px-2 py-1 text-sm">
               <span
-                className="underline mr-2 cursor-pointer"
+                className="underline mr-2 cursor-pointer text-gray-300 hover:text-white"
                 onClick={handleSearch}
                 onMouseDown={(e) => e.preventDefault()}
               >

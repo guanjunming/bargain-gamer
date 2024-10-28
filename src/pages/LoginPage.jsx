@@ -67,7 +67,7 @@ const LoginPage = () => {
               styles="tracking-widest "
             />
           </div>
-          <button className=" w-full mt-10 px-2 py-2.5 text-white shadow-lg rounded-sm bg-gradient-to-r from-blue-400 to-blue-700 hover:from-blue-300 hover:to-blue-600">
+          <button className=" w-full mt-10 px-2 py-2.5 text-white font-medium shadow-lg rounded-sm bg-gradient-to-r from-blue-400 to-blue-700 hover:from-blue-300 hover:to-blue-600">
             {!isPending && "Sign in"}
             {isPending && (
               <CircularProgress

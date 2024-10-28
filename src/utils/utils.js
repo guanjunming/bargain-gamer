@@ -63,10 +63,3 @@ export const getUpcomingDates = () => {
 
   return startDate + "," + endDate;
 };
-
-export const getAvatarInitials = (username) => {
-  if (username.length > 2) {
-    return username.slice(0, 2);
-  }
-  return username;
-};

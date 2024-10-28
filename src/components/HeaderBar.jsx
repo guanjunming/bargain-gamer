@@ -3,11 +3,17 @@ import SearchBar from "./SearchBar";
 import logo from "../assets/logo.svg";
 import Avatar from "@mui/material/Avatar";
 import { blueGrey } from "@mui/material/colors";
-import { getAvatarInitials } from "../utils/utils";
 import { useUserContext } from "../context/contextHooks";
+import { useState } from "react";
+import { useClickOutside } from "@mantine/hooks";
 
 const HeaderBar = () => {
-  const { user } = useUserContext();
+  const { user, logoutUser } = useUserContext();
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useClickOutside(() => setDropdownOpen(false));
+
+  // Toggle dropdown
+  const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
 
   return (
     <nav className=" w-full flex items-center gap-4 py-6 px-8 justify-between bg-gray-800">
@@ -22,7 +28,7 @@ const HeaderBar = () => {
 
       <SearchBar />
 
-      {!user && (
+      {!user ? (
         <div className="w-auto md:w-52">
           <Link to="/login">
             <h2 className="text-right text-gray-300 hover:text-white font-medium">
@@ -30,19 +36,43 @@ const HeaderBar = () => {
             </h2>
           </Link>
         </div>
-      )}
+      ) : (
+        <div className="relative" ref={dropdownRef}>
+          <button
+            onClick={toggleDropdown}
+            className="flex items-center gap-2 group"
+          >
+            <h2 className="max-w-36 text-gray-300 group-hover:text-white font-medium hidden md:block truncate">
+              {user.username}
+            </h2>
+            <Avatar sx={{ bgcolor: blueGrey[700], width: 40, height: 40 }}>
+              <span className="text-lg uppercase">{user.username[0]}</span>
+            </Avatar>
+          </button>
 
-      {user && (
-        <button className="flex items-center gap-2 group">
-          <h2 className="max-w-36 text-gray-300 group-hover:text-white font-medium hidden md:block truncate">
-            {user.username}
-          </h2>
-          <Avatar sx={{ bgcolor: blueGrey[700], width: 40, height: 40 }}>
-            <span className="text-lg uppercase">
-              {getAvatarInitials(user.username)}
-            </span>
-          </Avatar>
-        </button>
+          <div
+            className={`absolute right-0 mt-1 w-36 bg-gray-700 shadow-md z-10 transition-opacity duration-300 ease-in-out ${
+              dropdownOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+            }`}
+          >
+            <Link
+              to="/favorites"
+              onClick={() => setDropdownOpen(false)}
+              className="block px-5 py-2 text-sm text-white hover:bg-gray-100 hover:text-gray-700 hover:font-medium"
+            >
+              My Favorites
+            </Link>
+            <button
+              onClick={() => {
+                logoutUser();
+                setDropdownOpen(false);
+              }}
+              className="w-full text-left px-5 py-2 text-sm text-white hover:bg-gray-100 hover:text-gray-700 hover:font-medium"
+            >
+              Logout
+            </button>
+          </div>
+        </div>
       )}
     </nav>
   );
