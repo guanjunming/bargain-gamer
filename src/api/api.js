@@ -107,7 +107,6 @@ export const getGameFavorites = async (userId) => {
     return {
       favoriteId: record.id,
       gameId: record.fields.GameId,
-      userId: record.fields.UserId,
       createdTime: record.createdTime,
     };
   });
