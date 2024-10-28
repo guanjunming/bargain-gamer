@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import Input from "../components/Input";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { createUser } from "../api/api";
 import { useMutation } from "@tanstack/react-query";
 import { CircularProgress } from "@mui/material";
@@ -13,7 +13,7 @@ const SignUpPage = () => {
   const [isError, setIsError] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const { loginUser } = useUserContext();
+  const { user, loginUser } = useUserContext();
 
   const {
     mutate,
@@ -30,6 +30,10 @@ const SignUpPage = () => {
       navigate("/explore/featured");
     },
   });
+
+  if (user) {
+    return <Navigate to="/explore/featured" replace />;
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -63,8 +67,8 @@ const SignUpPage = () => {
   };
 
   return (
-    <div className="w-full min-h-full">
-      <div className="m-auto max-w-[700px] min-h-[600px] p-5">
+    <div className="w-full min-h-full py-10">
+      <div className="m-auto p-5 max-w-[700px] md:max-w-lg">
         {(isError || isRequestError) && (
           <div className="bg-black border-2 border-red-900 text-white p-2.5 mb-2.5 text-sm">
             {isError && error}

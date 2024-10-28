@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import Input from "../components/Input";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { authenticateUser } from "../api/api";
 import { useMutation } from "@tanstack/react-query";
 import { CircularProgress } from "@mui/material";
@@ -10,7 +10,7 @@ const LoginPage = () => {
   const usernameRef = useRef(null);
   const passwordRef = useRef(null);
   const navigate = useNavigate();
-  const { loginUser } = useUserContext();
+  const { user, loginUser } = useUserContext();
 
   const { mutate, isPending, isError, error } = useMutation({
     mutationFn: authenticateUser,
@@ -22,6 +22,10 @@ const LoginPage = () => {
       navigate("/explore/featured");
     },
   });
+
+  if (user) {
+    return <Navigate to="/explore/featured" replace />;
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -37,8 +41,8 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="w-full min-h-full">
-      <div className="m-auto max-w-[700px] min-h-[600px] p-5">
+    <div className="w-full min-h-full py-10">
+      <div className="m-auto p-5 max-w-[700px] md:max-w-lg">
         {isError && (
           <div className="bg-black border-2 border-red-900 text-white p-2.5 mb-2.5 text-sm">
             {error.message}

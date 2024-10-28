@@ -1,6 +1,6 @@
 import SideMenu from "../components/SideMenu";
 import GameCard from "../components/GameCard";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { Navigate, useLocation, useSearchParams } from "react-router-dom";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { getGamesList } from "../api/api";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -45,6 +45,10 @@ const GamesPage = () => {
       fetchNextPage();
     }
   }, [entry, fetchNextPage, hasNextPage]);
+
+  if (!query) {
+    return <Navigate to="/explore/featured" replace />;
+  }
 
   return (
     <div className="min-h-full flex px-8">

@@ -23,9 +23,13 @@ const HeaderBar = () => {
       <SearchBar />
 
       {!user && (
-        <Link to="/login">
-          <h2 className="text-gray-300 hover:text-white font-medium">Log In</h2>
-        </Link>
+        <div className="w-auto md:w-52">
+          <Link to="/login">
+            <h2 className="text-right text-gray-300 hover:text-white font-medium">
+              Log In
+            </h2>
+          </Link>
+        </div>
       )}
 
       {user && (
