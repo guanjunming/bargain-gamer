@@ -32,7 +32,7 @@ import {
 
 export const exploreQueryMap = {
   "/explore/featured": {
-    query: { ordering: "-rating", dates: getFeaturedDates() },
+    query: { ordering: "-added", dates: getFeaturedDates() },
     title: "Featured Games",
   },
   "/explore/all-time-top": {

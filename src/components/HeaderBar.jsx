@@ -29,8 +29,8 @@ const HeaderBar = () => {
       )}
 
       {user && (
-        <div className="flex items-center gap-2 group">
-          <h2 className="text-gray-300 group-hover:text-white font-medium hidden md:block">
+        <button className="flex items-center gap-2 group">
+          <h2 className="max-w-36 text-gray-300 group-hover:text-white font-medium hidden md:block truncate">
             {user.username}
           </h2>
           <Avatar sx={{ bgcolor: blueGrey[700], width: 40, height: 40 }}>
@@ -38,7 +38,7 @@ const HeaderBar = () => {
               {getAvatarInitials(user.username)}
             </span>
           </Avatar>
-        </div>
+        </button>
       )}
     </nav>
   );

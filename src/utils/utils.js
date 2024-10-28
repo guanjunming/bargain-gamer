@@ -23,7 +23,7 @@ export const modifyImageUrl = (imageUrl, size) => {
 export const getFeaturedDates = () => {
   const today = new Date();
   const pastDate = new Date(today);
-  pastDate.setFullYear(today.getFullYear() - 1);
+  pastDate.setMonth(today.getMonth() - 3);
 
   const startDate = pastDate.toISOString().split("T")[0];
   const endDate = today.toISOString().split("T")[0];
