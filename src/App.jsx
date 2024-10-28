@@ -10,7 +10,7 @@ import GameDetailPage from "./pages/GameDetailPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import GameDetailRedirect from "./pages/GameDetailRedirect";
 import { loader as gameDetailLoader } from "./pages/GameDetailPage";
-import { UserFavoritesProvider } from "./context/UserFavoritesContext";
+import { FavoritesProvider } from "./context/FavoritesContext";
 import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
 import { UserProvider } from "./context/UserContext";
@@ -42,9 +42,9 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <UserProvider>
-        <UserFavoritesProvider>
+        <FavoritesProvider>
           <RouterProvider router={router} />
-        </UserFavoritesProvider>
+        </FavoritesProvider>
       </UserProvider>
     </QueryClientProvider>
   );

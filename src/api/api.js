@@ -1,11 +1,9 @@
-const URL = "https://api.rawg.io/api";
-const API_KEY = import.meta.env.VITE_RAWG_API_KEY;
+const RAWG_URL = "https://api.rawg.io/api";
+const RAWG_API_KEY = import.meta.env.VITE_RAWG_API_KEY;
 
-const AIRTABLE_URL = "https://api.airtable.com/v0/appwHzAhArvZ2bkjm";
-
-const FAVORITES_API_URL = `${AIRTABLE_URL}/Favorites`;
-const AIRTABLE_API_TOKEN =
-  "patA1Ja9CdQYM11YP.0ddacd2068a75d1891f6a6224cf8ef6200dad334767964094c81216e48cf31de";
+const AIRTABLE_URL = "https://api.airtable.com/v0";
+const AIRTABLE_API_TOKEN = import.meta.env.VITE_AIRTABLE_API_TOKEN;
+const AIRTABLE_BASE_ID = import.meta.env.VITE_AIRTABLE_BASE_ID;
 
 export const getGamesList = async (params) => {
   let filteredParams = params;
@@ -14,30 +12,32 @@ export const getGamesList = async (params) => {
   }
 
   const searchParams = new URLSearchParams(filteredParams).toString();
-  const response = await fetch(`${URL}/games?key=${API_KEY}&${searchParams}`);
+  const response = await fetch(
+    `${RAWG_URL}/games?key=${RAWG_API_KEY}&${searchParams}`
+  );
 
   if (!response.ok) {
     console.log("has error");
     throw new Error(response.statusText);
   }
 
-  const data = await response.json();
-  return data;
+  const result = await response.json();
+  return result;
 };
 
 export const getGameById = async (id) => {
-  const response = await fetch(`${URL}/games/${id}?key=${API_KEY}`);
+  const response = await fetch(`${RAWG_URL}/games/${id}?key=${RAWG_API_KEY}`);
 
   if (!response.ok) {
     throw new Error(response.statusText);
   }
 
-  const data = await response.json();
-  return data;
+  const result = await response.json();
+  return result;
 };
 
 export const createUser = async ({ username, password }) => {
-  const response = await fetch(`${AIRTABLE_URL}/Users`, {
+  const response = await fetch(`${AIRTABLE_URL}/${AIRTABLE_BASE_ID}/Users`, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${AIRTABLE_API_TOKEN}`,
@@ -55,8 +55,8 @@ export const createUser = async ({ username, password }) => {
     throw new Error("Failed to create user.");
   }
 
-  const data = await response.json();
-  return data;
+  const result = await response.json();
+  return result;
 };
 
 export const authenticateUser = async ({ username, password }) => {
@@ -64,7 +64,7 @@ export const authenticateUser = async ({ username, password }) => {
     `AND({Username}="${username}",{Password}="${password}")`
   );
   const response = await fetch(
-    `${AIRTABLE_URL}/Users?filterByFormula=${queryParams}`,
+    `${AIRTABLE_URL}/${AIRTABLE_BASE_ID}/Users?filterByFormula=${queryParams}`,
     {
       headers: {
         Authorization: `Bearer ${AIRTABLE_API_TOKEN}`,
@@ -77,18 +77,19 @@ export const authenticateUser = async ({ username, password }) => {
     throw new Error("Failed to login user.");
   }
 
-  const data = await response.json();
+  const result = await response.json();
 
-  if (data.records.length > 0) {
-    return data.records[0];
+  if (result.records.length > 0) {
+    return result.records[0];
   } else {
     throw new Error("Please check you username and password and try again.");
   }
 };
 
-export const getFavorites = async (userId) => {
+export const getGameFavorites = async (userId) => {
+  const queryParams = encodeURIComponent(`UserId="${userId}"`);
   const response = await fetch(
-    `${FAVORITES_API_URL}?filterByFormula=UserId="${userId}"`,
+    `${AIRTABLE_URL}/${AIRTABLE_BASE_ID}/Favorites/?filterByFormula=${queryParams}`,
     {
       headers: {
         Authorization: `Bearer ${AIRTABLE_API_TOKEN}`,
@@ -97,42 +98,59 @@ export const getFavorites = async (userId) => {
   );
 
   if (!response.ok) {
-    throw new Error(response.statusText);
+    throw new Error("Failed to retrieve user favorites.");
   }
 
-  const data = await response.json();
-  return data.records.map((record) => record.fields);
+  const result = await response.json();
+
+  const resultsProcessed = result.records.map((record) => {
+    return {
+      favoriteId: record.id,
+      gameId: record.fields.GameId,
+      createdTime: record.createdTime,
+    };
+  });
+
+  return resultsProcessed;
 };
 
-export const addFavorite = async (userId, gameId) => {
-  const response = await fetch(FAVORITES_API_URL, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${AIRTABLE_API_TOKEN}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      fields: {
-        UserId: userId,
-        GameId: gameId,
+export const addGameFavorite = async ({ userId, gameId }) => {
+  const response = await fetch(
+    `${AIRTABLE_URL}/${AIRTABLE_BASE_ID}/Favorites`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${AIRTABLE_API_TOKEN}`,
+        "Content-Type": "application/json",
       },
-    }),
-  });
+      body: JSON.stringify({
+        fields: {
+          UserId: userId,
+          GameId: gameId,
+        },
+      }),
+    }
+  );
 
   if (!response.ok) {
-    throw new Error(response.statusText);
+    throw new Error("Failed to add user favorite.");
   }
 
-  return await response.json();
+  const result = await response.json();
+  return result;
 };
 
-export const removeFavorite = async (favoriteId) => {
-  const response = await fetch(`${FAVORITES_API_URL}/${favoriteId}`, {
-    method: "DELETE",
-    headers: {
-      Authorization: `Bearer ${AIRTABLE_API_TOKEN}`,
-    },
-  });
+export const deleteGameFavorite = async (favoriteId) => {
+  const response = await fetch(
+    `${AIRTABLE_URL}/${AIRTABLE_BASE_ID}/Favorites/${favoriteId}`,
+    {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${AIRTABLE_API_TOKEN}`,
+      },
+    }
+  );
 
-  return response.json();
+  const result = await response.json();
+  return result;
 };

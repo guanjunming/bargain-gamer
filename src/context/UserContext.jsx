@@ -25,11 +25,13 @@ export const UserProvider = ({ children }) => {
     }
   }, []);
 
-  const value = {
+  const userCtx = {
     user,
     loginUser,
     logoutUser,
   };
 
-  return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
+  return (
+    <UserContext.Provider value={userCtx}>{children}</UserContext.Provider>
+  );
 };
