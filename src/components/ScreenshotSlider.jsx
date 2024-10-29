@@ -1,82 +1,91 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import {
-  Pagination,
-  Autoplay,
-  Navigation,
-  FreeMode,
-  Thumbs,
-} from "swiper/modules";
+import { Autoplay, Navigation, Thumbs, EffectFade } from "swiper/modules";
 import "swiper/css";
-import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
+import "swiper/css/effect-fade";
 import { useState } from "react";
-import { getGameScreenshots } from "../api/api";
-import { useQuery } from "@tanstack/react-query";
+import imgPlaceholder from "../assets/image_not_available.png";
 
-const ScreenshotSlider = ({ gameId }) => {
+const ScreenshotSlider = ({ gameName, screenshots }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState();
 
-  const {
-    data: screenshots,
-    isLoading,
-    error,
-  } = useQuery({
-    queryKey: ["screenshots", gameId],
-    queryFn: () => getGameScreenshots(gameId),
-  });
-
-  if (isLoading) return <p>Loading screenshots...</p>;
-  if (error) return <p>Error loading screenshots.</p>;
-
   return (
-    <div className="game-screenshots w-full max-w-5xl mx-auto mt-8">
-      {/* Main Swiper */}
+    <div className="w-full max-w-5xl bg-gray-900 pb-1">
       <Swiper
-        modules={[FreeMode, Navigation, Thumbs]}
-        loop={true}
+        style={{
+          "--swiper-navigation-color": "#d5d7d8",
+          "--swiper-navigation-size": "2rem",
+          fontWeight: 900,
+          userSelect: "none",
+        }}
+        modules={[Navigation, Thumbs, EffectFade, Autoplay]}
+        centeredSlides={true}
+        loop={screenshots.length > 1}
         navigation={true}
+        effect={"fade"}
+        autoplay={{
+          delay: 4000,
+          disableOnInteraction: false,
+          pauseOnMouseEnter: true,
+        }}
         thumbs={{
           swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
+          slideThumbActiveClass: "active-thumbnail-frame",
         }}
         spaceBetween={10}
-        slidesPerView={1}
-        className="main-swiper mb-4 rounded-lg overflow-hidden shadow-lg"
+        className="overflow-hidden mb-1"
       >
-        {screenshots.map((screenshot) => (
-          <SwiperSlide key={screenshot.id}>
+        {screenshots.length > 0 ? (
+          screenshots.map((screenshot, index) => (
+            <SwiperSlide key={screenshot.id}>
+              <img
+                src={screenshot.image}
+                alt={`${gameName} Screenshot ${index + 1}`}
+                className="w-full h-full object-cover aspect-video"
+              />
+            </SwiperSlide>
+          ))
+        ) : (
+          <SwiperSlide>
             <img
-              src={screenshot.image}
-              alt="Game screenshot"
-              className="w-full h-96 object-cover rounded-lg transition-transform duration-200 hover:scale-105"
+              src={imgPlaceholder}
+              alt="Image not available"
+              className="w-full h-full object-cover bg-gray-300"
             />
           </SwiperSlide>
-        ))}
+        )}
       </Swiper>
 
-      {/* Thumbnail Swiper */}
       <Swiper
-        modules={[FreeMode, Navigation, Thumbs]}
-        onSwiper={setThumbsSwiper} // Ensure Swiper instance is only set if initialized
-        loop={true}
-        spaceBetween={10}
-        slidesPerView={4}
-        freeMode={true}
-        // className="h-1/5"
+        modules={[Navigation, Thumbs]}
+        onSwiper={setThumbsSwiper}
+        spaceBetween={5}
+        slidesPerView={5}
         watchSlidesProgress={true}
       >
-        {screenshots.map((screenshot) => (
-          <SwiperSlide
-            key={screenshot.id}
-            className="rounded-lg overflow-hidden cursor-pointer"
-          >
-            <img
-              src={screenshot.image}
-              alt="Thumbnail"
-              className="w-full h-24 object-cover opacity-75 transition-opacity duration-200 hover:opacity-100"
-            />
-          </SwiperSlide>
-        ))}
+        {screenshots.length > 0
+          ? screenshots.map((screenshot, index) => (
+              <SwiperSlide
+                key={screenshot.id}
+                className="cursor-pointer border-2 border-transparent"
+              >
+                <img
+                  src={screenshot.image}
+                  alt={`${gameName} Thumbnail ${index + 1}`}
+                  className="w-full h-full object-cover aspect-video"
+                />
+              </SwiperSlide>
+            ))
+          : Array.from({ length: 5 }).map((_, index) => (
+              <SwiperSlide key={index}>
+                <img
+                  src={imgPlaceholder}
+                  alt="Image not available"
+                  className="w-full h-full object-cover bg-gray-300"
+                />
+              </SwiperSlide>
+            ))}
       </Swiper>
     </div>
   );

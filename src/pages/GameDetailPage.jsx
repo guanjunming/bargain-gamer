@@ -1,25 +1,12 @@
 import { Link, useLoaderData, useNavigate, useParams } from "react-router-dom";
-import { getGameById } from "../api/api";
 import { useFavoritesContext, useUserContext } from "../context/contextHooks";
 import ScreenshotSlider from "../components/ScreenshotSlider";
 
-export const gameDetailLoader =
-  (queryClient) =>
-  async ({ params }) => {
-    const { id } = params;
-
-    return queryClient.fetchQuery({
-      queryKey: ["game", id],
-      queryFn: () => getGameById(id),
-    });
-  };
-
 const GameDetailPage = () => {
   const { id } = useParams();
-  const game = useLoaderData();
+  const { game, screenshots } = useLoaderData();
   const { user } = useUserContext();
-  const { addFavorite, removeFavorite, isFavorite, isPending } =
-    useFavoritesContext();
+  const { addFavorite, removeFavorite, isFavorite } = useFavoritesContext();
   const navigate = useNavigate();
 
   const isGameFavorite = isFavorite(id);
@@ -38,7 +25,7 @@ const GameDetailPage = () => {
 
   return (
     <div className="w-full px-4 sm:px-8 py-2 sm:py-4 text-gray-300">
-      <div>
+      <div className="mb-3">
         <div className="space-x-2 max-[500px]:hidden text-sm">
           <Link to="/explore/all-time-top" className="hover:text-white">
             All Games
@@ -60,7 +47,7 @@ const GameDetailPage = () => {
         </h1>
       </div>
 
-      <ScreenshotSlider gameId={id} />
+      <ScreenshotSlider gameName={game.name} screenshots={screenshots} />
 
       <button onClick={handleClickFavorite}>
         {isGameFavorite ? "Remove Favorites" : "Add to Favorites"}

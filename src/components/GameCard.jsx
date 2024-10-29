@@ -2,15 +2,20 @@ import { Link } from "react-router-dom";
 import { IconContext } from "react-icons";
 import PlatformIcons from "./PlatformIcons";
 import { modifyImageUrl } from "../utils/utils";
+import imgPlaceholder from "../assets/image_not_available.png";
 
 const GameCard = ({ game }) => {
   return (
     <div className="flex flex-col bg-gray-700 shadow-lg transition duration-300 hover:scale-[1.02]">
       <Link to={`/games/${game.id}/${game.slug}`}>
         <img
-          src={modifyImageUrl(game.background_image, "medium")}
+          src={
+            game.background_image
+              ? modifyImageUrl(game.background_image, "medium")
+              : imgPlaceholder
+          }
           alt={game.name + " Thumbnail"}
-          className="aspect-[1.7/1] object-cover bg-center w-full overflow-hidden"
+          className="aspect-[1.7/1] object-cover bg-center w-full overflow-hidden bg-gray-300"
         />
         <div className="flex flex-col gap-2 p-3">
           <h3 className="text-white font-bold text-xl">{game.name}</h3>

@@ -9,12 +9,12 @@ import GamesPage from "./pages/GamesPage";
 import GameDetailPage from "./pages/GameDetailPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import GameDetailRedirect from "./pages/GameDetailRedirect";
-import { gameDetailLoader } from "./pages/GameDetailPage";
 import { FavoritesProvider } from "./context/FavoritesContext";
 import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
 import { UserProvider } from "./context/UserContext";
 import FavoritesPage from "./pages/FavoritesPage";
+import { gameDetailLoader } from "./api/loader";
 
 const queryClient = new QueryClient();
 
