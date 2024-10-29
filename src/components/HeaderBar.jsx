@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import SearchBar from "./SearchBar";
-import logo from "../assets/logo.svg";
+import logo from "../assets/logo.png";
 import Avatar from "@mui/material/Avatar";
 import { blueGrey } from "@mui/material/colors";
 import { useUserContext } from "../context/contextHooks";
