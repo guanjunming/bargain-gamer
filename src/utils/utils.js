@@ -63,3 +63,7 @@ export const getUpcomingDates = () => {
 
   return startDate + "," + endDate;
 };
+
+export const isObjectNullOrEmpty = (obj) => {
+  return obj && Object.keys(obj).length === 0;
+};
