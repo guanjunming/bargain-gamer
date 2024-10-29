@@ -19,7 +19,7 @@ export const getGamesList = async (params) => {
   );
 
   if (!response.ok) {
-    throw new Error(response.statusText);
+    throw new Error(response.statusText || "Failed to retrieve games list.");
   }
 
   const result = await response.json();
@@ -30,11 +30,24 @@ export const getGameById = async (id) => {
   const response = await fetch(`${RAWG_URL}/games/${id}?key=${RAWG_API_KEY}`);
 
   if (!response.ok) {
-    throw new Error(response.statusText);
+    throw new Error(response.statusText || "Failed to retrieve game data.");
   }
 
   const result = await response.json();
   return result;
+};
+
+export const getGameScreenshots = async (id) => {
+  const response = await fetch(
+    `${RAWG_URL}/games/${id}/screenshots?key=${RAWG_API_KEY}`
+  );
+
+  if (!response.ok) {
+    throw new Error(response.statusText || "Failed to retrieve screenshots");
+  }
+
+  const result = await response.json();
+  return result.results;
 };
 
 export const createUser = async ({ username, password }) => {

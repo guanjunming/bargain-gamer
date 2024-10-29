@@ -1,6 +1,7 @@
 import { Link, useLoaderData, useNavigate, useParams } from "react-router-dom";
 import { getGameById } from "../api/api";
 import { useFavoritesContext, useUserContext } from "../context/contextHooks";
+import ScreenshotSlider from "../components/ScreenshotSlider";
 
 export const gameDetailLoader =
   (queryClient) =>
@@ -58,6 +59,8 @@ const GameDetailPage = () => {
           {game.name}
         </h1>
       </div>
+
+      <ScreenshotSlider gameId={id} />
 
       <button onClick={handleClickFavorite}>
         {isGameFavorite ? "Remove Favorites" : "Add to Favorites"}
