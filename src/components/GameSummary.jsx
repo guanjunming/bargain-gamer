@@ -10,8 +10,8 @@ const GameSummary = ({ game }) => {
 
   return (
     <>
-      <div className="w-full flex flex-row slg:flex-col gap-2">
-        <div className="w-1/2 slg:w-full">
+      <div className="w-full flex flex-col sm:max-slg:flex-row gap-2">
+        <div className="w-full sm:max-slg:w-1/2">
           <img
             src={
               game.background_image
@@ -19,11 +19,11 @@ const GameSummary = ({ game }) => {
                 : imgPlaceholder
             }
             alt={game.name + " header image"}
-            className="aspect-[1.8/1] object-cover bg-center"
+            className="aspect-[1.8/1] object-cover bg-center w-full"
           />
         </div>
 
-        <div className="w-1/2 slg:w-full text-sm flex flex-col gap-1">
+        <div className="w-full sm:max-slg:w-1/2 text-sm flex flex-col gap-1">
           <GameSummaryLabel label="Genre">
             {game.genres.map((genre) => genre.name).join(", ")}
           </GameSummaryLabel>
