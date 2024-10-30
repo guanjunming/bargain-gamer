@@ -27,7 +27,7 @@ const GameDetailPage = () => {
   };
 
   return (
-    <div className="w-full px-4 sm:px-8 py-2 sm:py-4 text-gray-300">
+    <div className="w-full py-2 sm:py-4 text-gray-300">
       <section className="mb-3">
         <div className="space-x-2 max-[500px]:hidden text-sm">
           <Link to="/explore/all-time-top" className="hover:text-white">

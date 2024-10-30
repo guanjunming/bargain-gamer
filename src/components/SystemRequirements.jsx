@@ -1,5 +1,5 @@
 const SystemRequirements = ({ requirements, label }) => {
-  if (requirements.length === 0) {
+  if (!requirements || requirements.length === 0) {
     return null;
   }
 

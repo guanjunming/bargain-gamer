@@ -15,6 +15,7 @@ import LoginPage from "./pages/LoginPage";
 import { UserProvider } from "./context/UserContext";
 import FavoritesPage from "./pages/FavoritesPage";
 import { gameDetailLoader } from "./api/loader";
+import MainLayout from "./pages/MainLayout";
 
 const queryClient = new QueryClient();
 
@@ -24,13 +25,38 @@ const router = createBrowserRouter([
     element: <RootLayout />,
     children: [
       { index: true, element: <HomePage /> },
-      { path: "games", element: <GamesPage /> },
-      { path: "explore/:list", element: <GamesPage /> },
-      { path: "favorites", element: <FavoritesPage /> },
+      {
+        path: "games",
+        element: (
+          <MainLayout>
+            <GamesPage />
+          </MainLayout>
+        ),
+      },
+      {
+        path: "explore/:list",
+        element: (
+          <MainLayout>
+            <GamesPage />
+          </MainLayout>
+        ),
+      },
+      {
+        path: "favorites",
+        element: (
+          <MainLayout>
+            <FavoritesPage />
+          </MainLayout>
+        ),
+      },
       { path: "games/:id", element: <GameDetailRedirect /> },
       {
         path: "games/:id/:slug",
-        element: <GameDetailPage />,
+        element: (
+          <MainLayout>
+            <GameDetailPage />
+          </MainLayout>
+        ),
         loader: gameDetailLoader(queryClient),
       },
       { path: "signup", element: <SignUpPage /> },

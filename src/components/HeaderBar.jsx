@@ -16,7 +16,7 @@ const HeaderBar = () => {
   const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
 
   return (
-    <nav className=" w-full flex items-center gap-4 py-6 px-8 justify-between bg-gray-800">
+    <nav className=" w-full flex items-center gap-4 py-6 px-3 justify-between">
       <Link to="/">
         <div className="flex items-center gap-2 transition-all hover:scale-105">
           <img src={logo} alt="Logo" className="h-10 w-10 min-w-10" />

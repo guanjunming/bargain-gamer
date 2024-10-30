@@ -43,7 +43,9 @@ const SystemRequirementsSection = ({ platforms }) => {
 
       <div
         className={`grid gap-4 ${
-          recommendedRequirements.length > 0 && "sm:grid-cols-2"
+          recommendedRequirements &&
+          recommendedRequirements.length > 0 &&
+          "sm:grid-cols-2"
         }`}
       >
         <SystemRequirements requirements={minRequirements} label="Minimum" />
