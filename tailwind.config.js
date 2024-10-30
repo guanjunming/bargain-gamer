@@ -6,6 +6,9 @@ export default {
       fontFamily: {
         montserrat: ["Montserrat", "sans-serif"],
       },
+      screens: {
+        slg: "910px",
+      },
     },
   },
   plugins: [],

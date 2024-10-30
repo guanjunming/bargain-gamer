@@ -20,6 +20,19 @@ export const modifyImageUrl = (imageUrl, size) => {
   return imageUrl;
 };
 
+export const isObjectNullOrEmpty = (obj) => {
+  return obj && Object.keys(obj).length === 0;
+};
+
+export const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  return date.toLocaleDateString("en-US", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
+};
+
 export const getFeaturedDates = () => {
   const today = new Date();
   const pastDate = new Date(today);
@@ -62,8 +75,4 @@ export const getUpcomingDates = () => {
   const endDate = upcomingDate.toISOString().split("T")[0];
 
   return startDate + "," + endDate;
-};
-
-export const isObjectNullOrEmpty = (obj) => {
-  return obj && Object.keys(obj).length === 0;
 };

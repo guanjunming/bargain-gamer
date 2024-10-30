@@ -3,6 +3,7 @@ import { useFavoritesContext, useUserContext } from "../context/contextHooks";
 import ScreenshotSlider from "../components/ScreenshotSlider";
 import DOMPurify from "dompurify";
 import SystemRequirementsSection from "../components/SystemRequirementsSection";
+import GameSummary from "../components/GameSummary";
 
 const GameDetailPage = () => {
   const { id } = useParams();
@@ -27,7 +28,7 @@ const GameDetailPage = () => {
   };
 
   return (
-    <div className="w-full py-2 sm:py-4 text-gray-300">
+    <div className="w-full text-gray-300 py-2 md:py-4 px-3.5 md:px-5">
       <section className="mb-3">
         <div className="space-x-2 max-[500px]:hidden text-sm">
           <Link to="/explore/all-games" className="hover:text-white">
@@ -50,11 +51,14 @@ const GameDetailPage = () => {
         </h1>
       </section>
 
-      <ScreenshotSlider gameName={game.name} screenshots={screenshots} />
-
-      <button onClick={handleClickFavorite}>
-        {isGameFavorite ? "Remove Favorites" : "Add to Favorites"}
-      </button>
+      <div className="flex flex-col slg:flex-row-reverse gap-4">
+        <div className="w-full slg:w-1/3">
+          <GameSummary game={game} />
+        </div>
+        <div className="w-full slg:w-2/3">
+          <ScreenshotSlider gameName={game.name} screenshots={screenshots} />
+        </div>
+      </div>
 
       <section className="my-7">
         <h2 className="uppercase text-xl font-medium text-white">

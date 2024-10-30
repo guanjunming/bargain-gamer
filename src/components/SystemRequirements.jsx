@@ -13,7 +13,7 @@ const SystemRequirements = ({ requirements, label }) => {
             return (
               <li key={index}>
                 {req.key !== label && (
-                  <span className="text-gray-500 font-medium">{`${req.key}: `}</span>
+                  <span className="text-gray-400">{`${req.key}: `}</span>
                 )}
                 {req.value}
               </li>
