@@ -5,6 +5,7 @@ import { getGamesList } from "../api/api";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { modifyImageUrl } from "../utils/utils";
 import { useDebounce } from "../hooks/useDebounce";
+import imgPlaceholder from "../assets/image_not_available.png";
 
 const SearchBar = () => {
   const [query, setQuery] = useState("");
@@ -67,9 +68,13 @@ const SearchBar = () => {
                 onMouseDown={(e) => e.preventDefault()} // to prevent input lose focus
               >
                 <img
-                  src={modifyImageUrl(game.background_image, "small")}
+                  src={
+                    game.background_image
+                      ? modifyImageUrl(game.background_image, "small")
+                      : imgPlaceholder
+                  }
                   alt={game.name}
-                  className="w-20 h-[2.8125rem] object-cover"
+                  className="w-20 h-[2.8125rem] object-cover bg-gray-300"
                 />
                 <p className="text-sm font-semibold">{game.name}</p>
               </Link>
