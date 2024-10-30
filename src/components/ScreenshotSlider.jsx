@@ -51,7 +51,7 @@ const ScreenshotSlider = ({ gameName, screenshots }) => {
             <img
               src={imgPlaceholder}
               alt="Image not available"
-              className="w-full h-full object-cover bg-gray-300"
+              className="w-full h-full object-cover"
             />
           </SwiperSlide>
         )}
@@ -82,7 +82,7 @@ const ScreenshotSlider = ({ gameName, screenshots }) => {
                 <img
                   src={imgPlaceholder}
                   alt="Image not available"
-                  className="w-full h-full object-cover bg-gray-300"
+                  className="w-full h-full object-cover"
                 />
               </SwiperSlide>
             ))}

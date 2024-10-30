@@ -74,7 +74,7 @@ const SearchBar = () => {
                       : imgPlaceholder
                   }
                   alt={game.name}
-                  className="w-20 h-[2.8125rem] object-cover bg-gray-300"
+                  className="w-20 h-[2.8125rem] object-cover"
                 />
                 <p className="text-sm font-semibold">{game.name}</p>
               </Link>
