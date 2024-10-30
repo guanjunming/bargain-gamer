@@ -50,7 +50,7 @@ const GamesPage = () => {
   }
 
   return (
-    <div>
+    <div className="w-full flex flex-col">
       <header className="mb-4">
         <h1 className="text-white font-bold text-4xl">
           {searchTerms

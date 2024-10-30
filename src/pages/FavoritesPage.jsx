@@ -35,7 +35,7 @@ const FavoritesPage = () => {
   return (
     <div className="w-full flex flex-col">
       <div className="mb-4">
-        <h1 className="text-white font-bold text-4xl">Favorites</h1>
+        <h1 className="text-white font-bold text-4xl">My Favorites</h1>
       </div>
 
       <div className="my-4">

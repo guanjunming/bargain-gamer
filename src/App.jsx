@@ -52,11 +52,7 @@ const router = createBrowserRouter([
       { path: "games/:id", element: <GameDetailRedirect /> },
       {
         path: "games/:id/:slug",
-        element: (
-          <MainLayout>
-            <GameDetailPage />
-          </MainLayout>
-        ),
+        element: <GameDetailPage />,
         loader: gameDetailLoader(queryClient),
       },
       { path: "signup", element: <SignUpPage /> },
