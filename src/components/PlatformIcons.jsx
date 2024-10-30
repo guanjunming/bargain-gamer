@@ -17,9 +17,13 @@ const PlatformIcons = ({ platforms }) => {
     nintendo: <SiNintendoswitch />,
   };
 
+  if (!platforms || platforms.length === 0) {
+    return null;
+  }
+
   return (
     <div className="flex items-center gap-1.5">
-      {platforms?.map((plat, index) => {
+      {platforms.map((plat, index) => {
         const icon = platformIconMap[plat.platform.slug];
         if (icon) {
           return <span key={index}>{icon}</span>;

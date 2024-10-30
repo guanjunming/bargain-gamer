@@ -19,10 +19,13 @@ const GamesPage = () => {
 
   let query = null;
   const searchTerms = searchParams.get("search");
+  const tagSearchTerms = searchParams.get("tags");
   const exploreQuery = exploreQueryMap[location.pathname];
 
   if (searchTerms) {
     query = { search: searchTerms, page_size: FETCH_PAGE_SIZE };
+  } else if (tagSearchTerms) {
+    query = { tags: tagSearchTerms, page_size: FETCH_PAGE_SIZE };
   } else if (exploreQuery) {
     query = { ...exploreQuery.query, page_size: FETCH_PAGE_SIZE };
   }
@@ -49,16 +52,17 @@ const GamesPage = () => {
     return <Navigate to="/explore/featured" replace />;
   }
 
+  let titleText = "Oops, something went wrong";
+  if (searchTerms || tagSearchTerms) {
+    titleText = "Search results for: " + (searchTerms || tagSearchTerms);
+  } else if (exploreQuery) {
+    titleText = exploreQuery.title;
+  }
+
   return (
     <div className="w-full flex flex-col">
       <header className="mb-4">
-        <h1 className="text-white font-bold text-4xl">
-          {searchTerms
-            ? `Search results for: ${searchTerms}`
-            : exploreQuery
-            ? exploreQuery.title
-            : "Oops, something went wrong"}
-        </h1>
+        <h1 className="text-white font-bold text-4xl">{titleText}</h1>
       </header>
 
       <section className="my-4">

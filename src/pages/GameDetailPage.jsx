@@ -51,7 +51,7 @@ const GameDetailPage = () => {
         </h1>
       </section>
 
-      <div className="flex flex-col slg:flex-row-reverse gap-4">
+      <div className="flex flex-col slg:flex-row-reverse gap-2">
         <div className="w-full slg:w-1/3">
           <GameSummary game={game} />
         </div>
