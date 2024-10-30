@@ -14,7 +14,7 @@ export default function SideMenu() {
 
   return (
     <IconContext.Provider value={{ size: "1.2rem" }}>
-      <aside className="min-w-[220px] text-white hidden sm:flex flex-col gap-y-6 py-8">
+      <aside className="min-w-[220px] text-white hidden sm:flex flex-col gap-y-6 py-8 sticky top-0 overflow-y-auto h-screen scrollbar-hide">
         <div className="space-y-3">
           <h2 className="font-bold text-xl">Explore</h2>
           <ul className="space-y-3">

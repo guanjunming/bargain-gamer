@@ -59,7 +59,7 @@ const SearchBar = () => {
         </label>
 
         {hasFocus && data && data.results.length > 0 && (
-          <div className="flex flex-col mt-1 py-1 bg-gray-700 text-white absolute top-full w-full z-10 rounded-md shadow-xl">
+          <div className="flex flex-col mt-1 py-1 bg-gray-700 text-white absolute top-full w-full z-10 shadow-xl">
             {data.results.map((game) => (
               <Link
                 to={`/games/${game.id}/${game.slug}`}

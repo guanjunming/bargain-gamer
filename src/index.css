@@ -8,6 +8,18 @@ body {
   @apply font-montserrat;
 }
 
+@layer utilities {
+  /* Chrome, Safari and Opera */
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollbar-hide {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+  }
+}
+
 .active-thumbnail-frame {
   border-color: #d5d7d8;
 }
