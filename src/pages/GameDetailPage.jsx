@@ -30,7 +30,7 @@ const GameDetailPage = () => {
     <div className="w-full py-2 sm:py-4 text-gray-300">
       <section className="mb-3">
         <div className="space-x-2 max-[500px]:hidden text-sm">
-          <Link to="/explore/all-time-top" className="hover:text-white">
+          <Link to="/explore/all-games" className="hover:text-white">
             All Games
           </Link>
           <span>{">"}</span>

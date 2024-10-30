@@ -31,6 +31,10 @@ import {
 } from "../utils/utils";
 
 export const exploreQueryMap = {
+  "/explore/all-games": {
+    query: {},
+    title: "All Games",
+  },
   "/explore/featured": {
     query: { ordering: "-added", dates: getFeaturedDates() },
     title: "Featured Games",

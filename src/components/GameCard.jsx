@@ -18,11 +18,11 @@ const GameCard = ({ game }) => {
           className="aspect-[1.7/1] object-cover bg-center w-full overflow-hidden bg-gray-300"
         />
         <div className="flex flex-col gap-2 p-3">
-          <h3 className="text-white font-bold text-xl">{game.name}</h3>
+          <h3 className="text-white font-bold text-lg">{game.name}</h3>
           <IconContext.Provider value={{ color: "white", size: "0.875rem" }}>
             <PlatformIcons platforms={game.parent_platforms} />
           </IconContext.Provider>
-          <p className="text-sm text-gray-300">
+          <p className="text-xs text-gray-300">
             {game.genres.map((genre) => genre.name).join(", ")}
           </p>
         </div>
