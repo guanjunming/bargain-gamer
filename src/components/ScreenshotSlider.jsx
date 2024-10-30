@@ -11,7 +11,7 @@ const ScreenshotSlider = ({ gameName, screenshots }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState();
 
   return (
-    <div className="w-full max-w-3xl bg-gray-900 pb-1">
+    <div className="w-full bg-gray-900 pb-1">
       <Swiper
         style={{
           "--swiper-navigation-color": "#d5d7d8",

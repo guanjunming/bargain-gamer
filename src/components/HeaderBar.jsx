@@ -18,7 +18,7 @@ const HeaderBar = () => {
   return (
     <nav className=" w-full flex items-center justify-between gap-4 py-6 px-3.5 md:px-5">
       <Link to="/">
-        <div className="flex items-center gap-2 transition-all hover:scale-105">
+        <div className="flex items-center gap-2 transition-all hover:scale-[1.02]">
           <img src={logo} alt="Logo" className="h-10 w-10 min-w-10" />
           <h1 className="hidden md:block text-white text-2xl font-bold">
             Game Haven

@@ -33,7 +33,7 @@ const FavoritesPage = () => {
   }, [entry, fetchNextPage, hasNextPage]);
 
   return (
-    <div className="w-full flex flex-col">
+    <section className="w-full flex flex-col">
       <div className="mb-4">
         <h1 className="text-white font-bold text-4xl">My Favorites</h1>
       </div>
@@ -60,7 +60,7 @@ const FavoritesPage = () => {
               <CircularProgress size={50} sx={{ color: "white" }} />
             </div>
           )}
-          <div className="w-full grid grid-cols-[repeat(auto-fill,minmax(320px,1fr))] gap-x-6 gap-y-6">
+          <div className="w-full grid grid-cols-[repeat(auto-fill,minmax(320px,1fr))] gap-x-4 gap-y-4">
             {data?.pages.map((page) =>
               page.results.map((game) => <GameCard key={game.id} game={game} />)
             )}
@@ -75,7 +75,7 @@ const FavoritesPage = () => {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

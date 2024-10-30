@@ -68,7 +68,7 @@ const GamesPage = () => {
               <CircularProgress size={50} sx={{ color: "white" }} />
             </div>
           )}
-          <div className="w-full grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-x-6 gap-y-6">
+          <div className="w-full grid grid-cols-[repeat(auto-fill,minmax(320px,1fr))] gap-x-4 gap-y-4">
             {data?.pages.map((page) =>
               page.results.map((game) => <GameCard key={game.id} game={game} />)
             )}

@@ -15,10 +15,12 @@ const GameCard = ({ game }) => {
               : imgPlaceholder
           }
           alt={game.name + " Thumbnail"}
-          className="aspect-[1.7/1] object-cover bg-center w-full overflow-hidden bg-gray-300"
+          className="aspect-[1.7/1] object-cover bg-center w-full overflow-hidden"
         />
         <div className="flex flex-col gap-2 p-3">
-          <h3 className="text-white font-bold text-lg">{game.name}</h3>
+          <h3 className="text-white font-bold text-lg leading-6">
+            {game.name}
+          </h3>
           <IconContext.Provider value={{ color: "white", size: "0.875rem" }}>
             <PlatformIcons platforms={game.parent_platforms} />
           </IconContext.Provider>
