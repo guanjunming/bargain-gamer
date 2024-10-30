@@ -1,31 +1,13 @@
-import { Link, useLoaderData, useNavigate, useParams } from "react-router-dom";
-import { useFavoritesContext, useUserContext } from "../context/contextHooks";
+import { Link, useLoaderData } from "react-router-dom";
 import ScreenshotSlider from "../components/ScreenshotSlider";
 import DOMPurify from "dompurify";
 import SystemRequirementsSection from "../components/SystemRequirementsSection";
 import GameSummary from "../components/GameSummary";
 
 const GameDetailPage = () => {
-  const { id } = useParams();
   const { game, screenshots } = useLoaderData();
-  const { user } = useUserContext();
-  const { addFavorite, removeFavorite, isFavorite } = useFavoritesContext();
-  const navigate = useNavigate();
 
   const cleanDescription = DOMPurify.sanitize(game.description);
-  const isGameFavorite = isFavorite(id);
-
-  const handleClickFavorite = () => {
-    if (user) {
-      if (isGameFavorite) {
-        removeFavorite(id);
-      } else {
-        addFavorite(id);
-      }
-    } else {
-      navigate("/login");
-    }
-  };
 
   return (
     <div className="w-full text-gray-300 py-2 md:py-4 px-3.5 md:px-5">
@@ -51,7 +33,7 @@ const GameDetailPage = () => {
         </h1>
       </section>
 
-      <div className="flex flex-col slg:flex-row-reverse gap-2">
+      <div className="flex flex-col slg:flex-row-reverse gap-2.5">
         <div className="w-full slg:w-1/3">
           <GameSummary game={game} />
         </div>
@@ -60,13 +42,13 @@ const GameDetailPage = () => {
         </div>
       </div>
 
-      <section className="my-7">
+      <section className="my-8">
         <h2 className="uppercase text-xl font-medium text-white">
           About This Game
         </h2>
         <hr className="border-gray-600 mb-2" />
         <div
-          className="space-y-4"
+          className="space-y-4 text-sm md:text-base"
           dangerouslySetInnerHTML={{ __html: cleanDescription }}
         />
       </section>
