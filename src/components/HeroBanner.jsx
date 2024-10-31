@@ -15,7 +15,7 @@ import heroImg9 from "../assets/hero/hero_9.jpg";
 import heroImg10 from "../assets/hero/hero_10.jpg";
 
 const HeroBanner = () => {
-  const imageClassName = "w-full h-auto aspect-[1.8/1] object-cover bg-center";
+  const imgClassName = "w-full h-auto aspect-[1.8/1] object-cover bg-center";
 
   return (
     <section className="flex flex-col-reverse justify-center md:flex-row py-6 px-3.5 md:px-5 items-center gap-8 mb-12">
@@ -56,34 +56,42 @@ const HeroBanner = () => {
           allowTouchMove={false}
         >
           <SwiperSlide>
-            <img src={heroImg1} alt="heroimage" className={imageClassName} />
+            <img src={heroImg1} alt="God of War" className={imgClassName} />
           </SwiperSlide>
           <SwiperSlide>
-            <img src={heroImg2} alt="heroimage" className={imageClassName} />
+            <img src={heroImg2} alt="Tales of Arise" className={imgClassName} />
           </SwiperSlide>
           <SwiperSlide>
-            <img src={heroImg3} alt="heroimage" className={imageClassName} />
+            <img src={heroImg3} alt="Nier Automata" className={imgClassName} />
           </SwiperSlide>
           <SwiperSlide>
-            <img src={heroImg4} alt="heroimage" className={imageClassName} />
+            <img src={heroImg4} alt="Cyberpunk 2077" className={imgClassName} />
           </SwiperSlide>
           <SwiperSlide>
-            <img src={heroImg5} alt="heroimage" className={imageClassName} />
+            <img
+              src={heroImg5}
+              alt="Hogwarts Legacy"
+              className={imgClassName}
+            />
           </SwiperSlide>
           <SwiperSlide>
-            <img src={heroImg6} alt="heroimage" className={imageClassName} />
+            <img src={heroImg6} alt="Sekiro" className={imgClassName} />
           </SwiperSlide>
           <SwiperSlide>
-            <img src={heroImg7} alt="heroimage" className={imageClassName} />
+            <img src={heroImg7} alt="The Witcher 3" className={imgClassName} />
           </SwiperSlide>
           <SwiperSlide>
-            <img src={heroImg8} alt="heroimage" className={imageClassName} />
+            <img
+              src={heroImg8}
+              alt="Red Dead Redemption 2"
+              className={imgClassName}
+            />
           </SwiperSlide>
           <SwiperSlide>
-            <img src={heroImg9} alt="heroimage" className={imageClassName} />
+            <img src={heroImg9} alt="Persona 5" className={imgClassName} />
           </SwiperSlide>
           <SwiperSlide>
-            <img src={heroImg10} alt="heroimage" className={imageClassName} />
+            <img src={heroImg10} alt="Elden Ring" className={imgClassName} />
           </SwiperSlide>
         </Swiper>
       </div>

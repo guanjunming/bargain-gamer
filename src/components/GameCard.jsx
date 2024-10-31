@@ -33,4 +33,5 @@ const GameCard = ({ game }) => {
     </div>
   );
 };
+
 export default GameCard;

@@ -26,4 +26,5 @@ const HomeGameCard = ({ game }) => {
     </div>
   );
 };
+
 export default HomeGameCard;

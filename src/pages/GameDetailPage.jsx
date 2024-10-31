@@ -1,5 +1,5 @@
 import { useLoaderData } from "react-router-dom";
-import ScreenshotSlider from "../components/ScreenshotSlider";
+import ScreenshotDisplay from "../components/ScreenshotDisplay";
 import DOMPurify from "dompurify";
 import SystemRequirementsSection from "../components/SystemRequirementsSection";
 import GameSummary from "../components/GameSummary";
@@ -25,7 +25,7 @@ const GameDetailPage = () => {
           <GameSummary game={game} />
         </div>
         <div className="w-full ml:w-2/3">
-          <ScreenshotSlider gameName={game.name} screenshots={screenshots} />
+          <ScreenshotDisplay gameName={game.name} screenshots={screenshots} />
         </div>
       </section>
 

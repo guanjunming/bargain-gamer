@@ -2,11 +2,9 @@ import { FETCH_PAGE_SIZE } from "../data/constants";
 
 const RAWG_URL = "https://api.rawg.io/api";
 const RAWG_API_KEY = import.meta.env.VITE_RAWG_API_KEY;
-
 const AIRTABLE_URL = "https://api.airtable.com/v0";
 const AIRTABLE_API_TOKEN = import.meta.env.VITE_AIRTABLE_API_TOKEN;
 const AIRTABLE_BASE_ID = import.meta.env.VITE_AIRTABLE_BASE_ID;
-
 const CHEAPSHARK_URL = "https://www.cheapshark.com/api/1.0";
 
 export const getGamesList = async (params) => {
@@ -21,7 +19,7 @@ export const getGamesList = async (params) => {
   );
 
   if (!response.ok) {
-    throw new Error(response.statusText || "Failed to retrieve games list.");
+    throw new Error("Failed to retrieve games list.");
   }
 
   const result = await response.json();
@@ -32,7 +30,7 @@ export const getGameById = async (id) => {
   const response = await fetch(`${RAWG_URL}/games/${id}?key=${RAWG_API_KEY}`);
 
   if (!response.ok) {
-    throw new Error(response.statusText || "Failed to retrieve game data.");
+    throw new Error("Failed to retrieve game data.");
   }
 
   const result = await response.json();
@@ -45,7 +43,7 @@ export const getGameScreenshots = async (id) => {
   );
 
   if (!response.ok) {
-    throw new Error(response.statusText || "Failed to retrieve screenshots");
+    throw new Error("Failed to retrieve screenshots");
   }
 
   const result = await response.json();
@@ -185,6 +183,10 @@ export const deleteGameFavorite = async (favoriteId) => {
       },
     }
   );
+
+  if (!response.ok) {
+    throw new Error("Failed to delete user favorite.");
+  }
 
   const result = await response.json();
   return result;

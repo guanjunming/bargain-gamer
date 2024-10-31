@@ -101,13 +101,17 @@ const SignUpPage = () => {
               styles="tracking-widest "
             />
           </div>
-          <button className=" w-full mt-10 px-2 py-2.5 text-white font-medium shadow-lg text-shadow rounded-sm bg-gradient-to-r from-blue-400 to-blue-700 hover:from-blue-300 hover:to-blue-600">
-            {!isPending && "Sign up"}
-            {isPending && (
+          <button
+            disabled={isPending}
+            className=" w-full mt-10 px-2 py-2.5 text-white font-medium shadow-lg text-shadow rounded-sm bg-gradient-to-r from-blue-400 to-blue-700 hover:from-blue-300 hover:to-blue-600"
+          >
+            {isPending ? (
               <CircularProgress
                 size={18}
                 sx={{ color: "white", marginBottom: "-2px" }}
               />
+            ) : (
+              "Sign up"
             )}
           </button>
           <Link to="/login" className="flex justify-center mt-6">

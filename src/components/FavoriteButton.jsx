@@ -26,6 +26,7 @@ const FavoriteButton = ({ gameId }) => {
   return (
     <div className="w-full ml:w-auto text-sm">
       <button
+        disabled={isPending}
         onClick={handleClick}
         className="w-full px-3 py-2 text-gray-200 font-medium hover:text-white shadow-lg text-shadow rounded-sm bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500"
       >

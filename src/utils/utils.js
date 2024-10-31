@@ -1,4 +1,4 @@
-import { CHEAPSHARK_DOMAIN } from "../data/cheapSharkData";
+import { CHEAPSHARK_DOMAIN } from "../data/storesInfoData";
 
 export const modifyImageUrl = (imageUrl, size) => {
   if (!imageUrl) {

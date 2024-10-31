@@ -55,8 +55,6 @@ export default function SideMenu() {
               setShowAllGenres={setShowAllGenres}
             />
           </ul>
-
-          <button></button>
         </div>
       </aside>
     </IconContext.Provider>

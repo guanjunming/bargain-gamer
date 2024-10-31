@@ -7,7 +7,7 @@ import "swiper/css/effect-fade";
 import { useState } from "react";
 import imgPlaceholder from "../assets/image_not_available.png";
 
-const ScreenshotSlider = ({ gameName, screenshots }) => {
+const ScreenshotDisplay = ({ gameName, screenshots }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState();
 
   return (
@@ -96,4 +96,4 @@ const ScreenshotSlider = ({ gameName, screenshots }) => {
   );
 };
 
-export default ScreenshotSlider;
+export default ScreenshotDisplay;

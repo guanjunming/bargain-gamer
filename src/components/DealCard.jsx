@@ -1,5 +1,5 @@
 import { useMediaQuery } from "@mantine/hooks";
-import { CHEAPSHARK_DEAL_REDIRECT, storesInfo } from "../data/cheapSharkData";
+import { CHEAPSHARK_DEAL_REDIRECT, storesInfo } from "../data/storesInfoData";
 import { getStoreBannerUrl } from "../utils/utils";
 
 const DealCard = ({ deal }) => {
