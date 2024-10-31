@@ -24,7 +24,11 @@ const router = createBrowserRouter([
     path: "/",
     element: <RootLayout />,
     children: [
-      { index: true, element: <HomePage />, loader: homeLoader(queryClient) },
+      {
+        index: true,
+        element: <HomePage />,
+        loader: homeLoader(queryClient),
+      },
       {
         path: "games",
         element: (

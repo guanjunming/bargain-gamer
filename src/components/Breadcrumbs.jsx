@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Breadcrumbs = ({ game }) => {
   return (
-    <div className="space-x-2 hidden xs:block text-sm">
+    <div className="space-x-2 text-sm">
       <Link to="/explore/all-games" className="hover:text-white">
         All Games
       </Link>
