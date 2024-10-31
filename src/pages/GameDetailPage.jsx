@@ -3,7 +3,7 @@ import ScreenshotSlider from "../components/ScreenshotSlider";
 import DOMPurify from "dompurify";
 import SystemRequirementsSection from "../components/SystemRequirementsSection";
 import GameSummary from "../components/GameSummary";
-import Breadcrumbs from "../components/BreadCrumbs";
+import Breadcrumbs from "../components/Breadcrumbs";
 import GameDeals from "../components/GameDeals";
 
 const GameDetailPage = () => {
