@@ -71,7 +71,7 @@ export const getNewReleaseDates = () => {
 export const getUpcomingDates = () => {
   const today = new Date();
   const upcomingDate = new Date(today);
-  upcomingDate.setMonth(today.getMonth() + 1);
+  upcomingDate.setMonth(today.getMonth() + 3);
 
   const startDate = today.toISOString().split("T")[0];
   const endDate = upcomingDate.toISOString().split("T")[0];

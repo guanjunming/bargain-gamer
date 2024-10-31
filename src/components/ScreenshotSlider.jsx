@@ -14,7 +14,7 @@ const ScreenshotSlider = ({ gameName, screenshots }) => {
     <div className="w-full bg-gray-900 pb-1">
       <Swiper
         style={{
-          "--swiper-navigation-color": "#d5d7d8",
+          "--swiper-navigation-color": "#fff",
           "--swiper-navigation-size": "2rem",
           fontWeight: 900,
           userSelect: "none",

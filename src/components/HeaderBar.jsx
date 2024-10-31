@@ -21,7 +21,7 @@ const HeaderBar = () => {
         <div className="flex items-center gap-2 transition-all hover:scale-[1.02]">
           <img src={logo} alt="Logo" className="h-10 w-10 min-w-10" />
           <h1 className="hidden md:block text-white text-2xl font-bold">
-            Game Haven
+            GameHaven
           </h1>
         </div>
       </Link>
@@ -32,7 +32,7 @@ const HeaderBar = () => {
         <div className="w-auto md:w-52">
           <Link to="/login">
             <h2 className="text-right text-gray-300 hover:text-white font-medium">
-              Log In
+              Login
             </h2>
           </Link>
         </div>

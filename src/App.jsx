@@ -14,7 +14,7 @@ import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
 import { UserProvider } from "./context/UserContext";
 import FavoritesPage from "./pages/FavoritesPage";
-import { gameDetailLoader } from "./api/loader";
+import { gameDetailLoader, homeLoader } from "./api/loader";
 import MainLayout from "./pages/MainLayout";
 
 const queryClient = new QueryClient();
@@ -24,7 +24,7 @@ const router = createBrowserRouter([
     path: "/",
     element: <RootLayout />,
     children: [
-      { index: true, element: <HomePage /> },
+      { index: true, element: <HomePage />, loader: homeLoader(queryClient) },
       {
         path: "games",
         element: (
