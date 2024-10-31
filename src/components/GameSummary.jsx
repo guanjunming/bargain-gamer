@@ -11,8 +11,8 @@ const GameSummary = ({ game }) => {
 
   return (
     <div className="flex flex-col gap-2 h-full">
-      <div className="w-full flex flex-col sm:max-slg:flex-row gap-2">
-        <div className="w-full sm:max-slg:w-1/2">
+      <div className="w-full flex flex-col sm:max-ml:flex-row gap-2">
+        <div className="w-full sm:max-ml:w-1/2">
           <img
             src={
               game.background_image
@@ -24,7 +24,7 @@ const GameSummary = ({ game }) => {
           />
         </div>
 
-        <div className="w-full sm:max-slg:w-1/2 text-sm flex flex-col gap-1">
+        <div className="w-full sm:max-ml:w-1/2 text-sm flex flex-col gap-1">
           <GameSummaryLabel label="Genre">
             {game.genres.map((genre) => genre.name).join(", ")}
           </GameSummaryLabel>
@@ -55,7 +55,7 @@ const GameSummary = ({ game }) => {
             )}
           </GameSummaryLabel>
 
-          <div className="hidden sm:max-slg:flex mt-auto">
+          <div className="hidden sm:max-ml:flex mt-auto">
             <FavoriteButton gameId={game.id} />
           </div>
         </div>
@@ -78,7 +78,7 @@ const GameSummary = ({ game }) => {
         </div>
       )}
 
-      <div className="flex sm:max-slg:hidden mt-auto">
+      <div className="flex sm:max-ml:hidden mt-auto">
         <FavoriteButton gameId={game.id} />
       </div>
     </div>

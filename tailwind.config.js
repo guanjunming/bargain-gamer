@@ -7,7 +7,11 @@ export default {
         montserrat: ["Montserrat", "sans-serif"],
       },
       screens: {
-        slg: "910px",
+        xs: "500px",
+        ml: "910px",
+      },
+      rotate: {
+        8: "8deg",
       },
     },
   },

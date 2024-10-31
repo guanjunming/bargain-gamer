@@ -7,6 +7,8 @@ const AIRTABLE_URL = "https://api.airtable.com/v0";
 const AIRTABLE_API_TOKEN = import.meta.env.VITE_AIRTABLE_API_TOKEN;
 const AIRTABLE_BASE_ID = import.meta.env.VITE_AIRTABLE_BASE_ID;
 
+const CHEAPSHARK_URL = "https://www.cheapshark.com/api/1.0";
+
 export const getGamesList = async (params) => {
   let filteredParams = params;
   if (!("parent_platforms" in params) && !("platforms" in params)) {
@@ -186,4 +188,45 @@ export const deleteGameFavorite = async (favoriteId) => {
 
   const result = await response.json();
   return result;
+};
+
+export const getGameIdByName = async (name, slug) => {
+  const nameResponse = await fetch(
+    `${CHEAPSHARK_URL}/games?title=${encodeURIComponent(name)}&limit=1`
+  );
+
+  if (!nameResponse.ok) {
+    throw new Error("Failed to retrieve game data.");
+  }
+
+  const nameResult = await nameResponse.json();
+  if (nameResult.length > 0) {
+    return nameResult[0].gameID;
+  }
+
+  const slugResponse = await fetch(
+    `${CHEAPSHARK_URL}/games?title=${encodeURIComponent(slug)}&limit=1`
+  );
+
+  if (!slugResponse.ok) {
+    throw new Error("Failed to retrieve game data.");
+  }
+
+  const slugResult = await slugResponse.json();
+  if (slugResult.length > 0) {
+    return slugResult[0].gameID;
+  }
+
+  throw new Error("Failed to retrieve game data.");
+};
+
+export const getDealsByGameId = async (gameId) => {
+  const response = await fetch(`${CHEAPSHARK_URL}/games?id=${gameId}`);
+
+  if (!response.ok) {
+    throw new Error("Failed to retrieve game deals.");
+  }
+
+  const result = await response.json();
+  return result.deals;
 };

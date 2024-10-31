@@ -61,8 +61,13 @@ const ScreenshotSlider = ({ gameName, screenshots }) => {
         modules={[Navigation, Thumbs]}
         onSwiper={setThumbsSwiper}
         spaceBetween={5}
-        slidesPerView={5}
+        slidesPerView={4}
         watchSlidesProgress={true}
+        breakpoints={{
+          500: {
+            slidesPerView: 5,
+          },
+        }}
       >
         {screenshots.length > 0
           ? screenshots.map((screenshot, index) => (

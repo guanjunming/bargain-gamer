@@ -1,3 +1,5 @@
+import { CHEAPSHARK_DOMAIN } from "../data/cheapSharkData";
+
 export const modifyImageUrl = (imageUrl, size) => {
   if (!imageUrl) {
     return null;
@@ -75,4 +77,8 @@ export const getUpcomingDates = () => {
   const endDate = upcomingDate.toISOString().split("T")[0];
 
   return startDate + "," + endDate;
+};
+
+export const getStoreBannerUrl = (storeInfo, imageType) => {
+  return `${CHEAPSHARK_DOMAIN}${storeInfo.images[imageType]}`;
 };
