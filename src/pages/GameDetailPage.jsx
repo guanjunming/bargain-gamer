@@ -12,7 +12,7 @@ const GameDetailPage = () => {
   const cleanDescription = DOMPurify.sanitize(game.description);
 
   return (
-    <div className="w-full text-gray-300 py-2 md:py-4 px-3.5 md:px-5">
+    <div className="w-full text-gray-300 py-4 px-3.5 md:px-5">
       <section className="mb-3">
         <Breadcrumbs game={game} />
         <h1 className="text-[1.625rem] text-white font-semibold">

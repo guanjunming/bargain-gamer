@@ -12,7 +12,7 @@ const RootLayout = () => {
       </div>
 
       <ScrollToTop />
-      <main className="max-w-screen-xl m-auto mt-5">
+      <main className="max-w-screen-xl m-auto">
         <Outlet />
       </main>
     </div>
