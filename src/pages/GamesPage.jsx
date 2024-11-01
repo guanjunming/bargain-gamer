@@ -60,7 +60,7 @@ const GamesPage = () => {
   }
 
   return (
-    <div className="w-full flex flex-col pt-4">
+    <div className="w-full flex flex-col pt-4 px-3.5 md:px-5">
       <header className="mb-4">
         <h1 className="text-white font-bold text-4xl">{titleText}</h1>
       </header>

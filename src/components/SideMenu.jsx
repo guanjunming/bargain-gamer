@@ -8,13 +8,18 @@ import {
 import SideMenuLink from "./SideMenuLink";
 import { IconContext } from "react-icons";
 import ShowAllButton from "./ShowAllButton";
+import SearchBar from "./SearchBar";
 
 export default function SideMenu() {
   const [showAllGenres, setShowAllGenres] = useState(false);
 
   return (
     <IconContext.Provider value={{ size: "1.2rem" }}>
-      <aside className="min-w-[220px] text-white hidden sm:flex flex-col gap-y-6 pt-8 pb-14 sticky top-0 overflow-y-auto h-screen scrollbar-hide">
+      <aside className="min-w-[220px] text-white flex flex-col gap-y-6 pt-8 pb-14 px-3 sticky top-0 overflow-y-auto h-screen scrollbar-hide">
+        <div className="sm:hidden">
+          <SearchBar />
+        </div>
+
         <div className="space-y-3">
           <h2 className="font-bold text-xl">Explore</h2>
           <ul className="space-y-3">

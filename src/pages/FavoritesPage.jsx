@@ -33,7 +33,7 @@ const FavoritesPage = () => {
   }, [entry, fetchNextPage, hasNextPage]);
 
   return (
-    <section className="w-full flex flex-col pt-4">
+    <section className="w-full flex flex-col pt-4 px-3.5 md:px-5">
       <div className="mb-4">
         <h1 className="text-white font-bold text-4xl">My Favorites</h1>
       </div>

@@ -20,13 +20,13 @@ const HeaderBar = () => {
       <Link to="/">
         <div className="flex items-center gap-2 transition-all hover:scale-[1.02]">
           <img src={logo} alt="Logo" className="h-10 w-10 min-w-10" />
-          <h1 className="hidden md:block text-white text-2xl font-bold">
-            GameHaven
-          </h1>
+          <h1 className="text-white text-2xl font-bold">GameHaven</h1>
         </div>
       </Link>
 
-      <SearchBar />
+      <div className="hidden sm:block w-full max-w-sm">
+        <SearchBar />
+      </div>
 
       {!user ? (
         <div className="w-auto md:w-52">

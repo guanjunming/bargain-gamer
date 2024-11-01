@@ -34,7 +34,7 @@ const SearchBar = () => {
   };
 
   return (
-    <div className="w-full max-w-sm bg-white rounded-sm">
+    <div className="w-full bg-white rounded-sm text-black">
       <form
         className="relative flex items-center gap-2 w-full"
         onSubmit={handleSearch}
