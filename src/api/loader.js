@@ -25,12 +25,12 @@ export const homeLoader = (queryClient) => async () => {
   const featuredQuery = {
     ...exploreQueryMap["/explore/featured"].query,
     page_size: HOME_CAROUSEL_SIZE,
-    page: 2,
+    page: 2, // fetch different page to reduce probability of showing the same games
   };
   const popularQuery = {
     ...exploreQueryMap["/explore/popular"].query,
     page_size: HOME_CAROUSEL_SIZE,
-    page: 3,
+    page: 3, // fetch different page to reduce probability of showing the same games
   };
   const newReleaseQuery = {
     ...exploreQueryMap["/explore/new-releases"].query,
@@ -52,9 +52,9 @@ export const homeLoader = (queryClient) => async () => {
     },
   ];
 
-  await Promise.all(
+  const [featuredRes, popularRes, newReleaseRes] = await Promise.all(
     queries.map((query) =>
-      queryClient.prefetchQuery({
+      queryClient.fetchQuery({
         queryKey: query.key,
         queryFn: query.queryFn,
         staleTime: 10 * 60 * 1000,
@@ -62,9 +62,5 @@ export const homeLoader = (queryClient) => async () => {
     )
   );
 
-  return {
-    featuredRes: queryClient.getQueryData(["games", featuredQuery]),
-    popularRes: queryClient.getQueryData(["games", popularQuery]),
-    newReleaseRes: queryClient.getQueryData(["games", newReleaseQuery]),
-  };
+  return { featuredRes, popularRes, newReleaseRes };
 };

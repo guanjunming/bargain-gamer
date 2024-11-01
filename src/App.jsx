@@ -1,8 +1,4 @@
-import {
-  createBrowserRouter,
-  Navigate,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RootLayout from "./pages/RootLayout";
 import HomePage from "./pages/HomePage";
 import GamesPage from "./pages/GamesPage";
@@ -16,6 +12,7 @@ import { UserProvider } from "./context/UserContext";
 import FavoritesPage from "./pages/FavoritesPage";
 import { gameDetailLoader, homeLoader } from "./api/loader";
 import MainLayout from "./pages/MainLayout";
+import ErrorPage from "./pages/ErrorPage";
 
 const queryClient = new QueryClient();
 
@@ -23,6 +20,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
@@ -53,7 +51,11 @@ const router = createBrowserRouter([
           </MainLayout>
         ),
       },
-      { path: "games/:id", element: <GameDetailRedirect /> },
+      {
+        path: "games/:id",
+        element: <GameDetailRedirect />,
+        loader: gameDetailLoader(queryClient),
+      },
       {
         path: "games/:id/:slug",
         element: <GameDetailPage />,
@@ -61,7 +63,6 @@ const router = createBrowserRouter([
       },
       { path: "signup", element: <SignUpPage /> },
       { path: "login", element: <LoginPage /> },
-      { path: "*", element: <Navigate replace to="/" /> },
     ],
   },
 ]);
