@@ -1,3 +1,4 @@
+import Footer from "../components/Footer";
 import HeroBanner from "../components/HeroBanner";
 import HomeGameCarousel from "../components/HomeGameCarousel";
 import { useLoaderData } from "react-router-dom";
@@ -10,7 +11,7 @@ const HomePage = () => {
       <HeroBanner />
 
       <div className="w-[96%] m-auto py-2 md:py-4 px-3.5 md:px-5">
-        <div className="space-y-28 mb-36">
+        <div className="space-y-28 mb-28">
           {featuredRes && (
             <HomeGameCarousel
               games={featuredRes.results}
@@ -36,6 +37,8 @@ const HomePage = () => {
           )}
         </div>
       </div>
+
+      <Footer />
     </>
   );
 };
