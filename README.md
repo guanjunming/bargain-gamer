@@ -1,3 +1,5 @@
+![banner](https://github.com/user-attachments/assets/f1868e55-99fe-4d8e-9667-18122db32e14)
+
 # GameHaven
 
 **GameHaven** is a game discovery and price-tracking web application designed for gaming enthusiasts, built with a modern tech stack using React, Tailwind CSS, React Router, and TanStack Query. GameHaven leverages the RAWG Video Games Database API and CheapShark API to provide a comprehensive, up-to-date catalog of games and deals from various online stores. Data storage for user favorites is managed via Airtable, allowing users to personalize their experience.
@@ -20,14 +22,19 @@ Try out the app at: [https://playgamehaven.netlify.app](https://playgamehaven.ne
 ## Screenshots
 
 ### Landing Page
+![landing-page](https://github.com/user-attachments/assets/ff5969b7-173f-4252-964d-6d253244f149)
 
 ### Explore Games
+![featured](https://github.com/user-attachments/assets/c6b0ec27-c3be-4f47-a2cb-390c63cc482e)
 
 ### Game Details
+![game-details](https://github.com/user-attachments/assets/0a918f05-d4f4-4f03-bcc2-0632923ceb59)
 
 ### Login Page
+![login](https://github.com/user-attachments/assets/1abe92fd-cc8a-48d0-8b01-cd0cc1c91cf1)
 
-### User Favorites
+### Favorites Page
+![favorites](https://github.com/user-attachments/assets/ab970209-44a3-40cb-9386-334445bf2b40)
 
 ## Features
 
